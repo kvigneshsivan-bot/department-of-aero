@@ -1,0 +1,2104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StellarX - Aerospace Engineering Event</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0d0a1a 100%);
+            color: #e0e0e0;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Navigation Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(135deg, rgba(10, 14, 39, 0.95) 0%, rgba(26, 31, 58, 0.95) 100%);
+            border-bottom: 2px solid rgba(240, 165, 0, 0.3);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .nav-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #f0a500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-logo span {
+            color: #ff6b00;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #b0a080;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #f0a500, #ff6b00);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #f0a500;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: #f0a500;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #f0a500;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(10px, 10px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Page transitions */
+        .page-content {
+            display: none;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .page-content.active {
+            display: block;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* About Section */
+        .about-section {
+            padding-top: 80px;
+            min-height: 100vh;
+        }
+
+        .about-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        .about-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: #f0a500;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        .about-subtitle {
+            font-size: 1.2rem;
+            color: #ff6b00;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        .about-intro-text {
+            font-size: 1.15rem;
+            color: #d0d0d0;
+            line-height: 2;
+            margin-bottom: 40px;
+            text-align: center;
+            max-width: 850px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Animated Section Headers */
+        .section-header-anim {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: #f0a500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+            margin: 50px 0 35px;
+            position: relative;
+            padding-bottom: 15px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .section-header-anim.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header-anim::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #f0a500, #ff6b00, #f0a500);
+            transition: width 0.8s ease 0.3s;
+            border-radius: 2px;
+        }
+
+        .section-header-anim.visible::after {
+            width: 120px;
+        }
+
+        .section-header-sub {
+            font-size: 1rem;
+            color: #b0a080;
+            text-align: center;
+            margin-bottom: 30px;
+            font-style: italic;
+            letter-spacing: 1px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease 0.4s;
+        }
+
+        .section-header-sub.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Event Detail Card (new animated version) */
+        .about-event-card {
+            background: linear-gradient(135deg, rgba(30, 30, 60, 0.7) 0%, rgba(20, 20, 50, 0.7) 100%);
+            border: 2px solid rgba(240, 165, 0, 0.2);
+            border-radius: 18px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 20px rgba(240, 165, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .about-event-card.from-right {
+            transform: translateX(40px);
+        }
+
+        .about-event-card.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .about-event-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(240, 165, 0, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .about-event-card:hover {
+            border-color: rgba(240, 165, 0, 0.5);
+            box-shadow: 0 0 40px rgba(240, 165, 0, 0.2), 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .about-event-card .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .about-event-card .card-icon {
+            font-size: 2.5rem;
+            width: 65px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(240, 165, 0, 0.15), rgba(255, 107, 0, 0.08));
+            border-radius: 16px;
+            border: 1px solid rgba(240, 165, 0, 0.3);
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .about-event-card:hover .card-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .about-event-card .card-header h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: #f0a500;
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+
+        .about-event-card .card-header .card-tagline {
+            font-size: 0.9rem;
+            color: #b0a080;
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        .about-event-card .card-body p {
+            color: #d0d0d0;
+            line-height: 1.9;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .about-event-card .card-body h4 {
+            color: #ff6b00;
+            font-size: 1rem;
+            margin: 18px 0 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .about-event-card .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin: 15px 0;
+        }
+
+        .about-event-card .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            background: rgba(240, 165, 0, 0.06);
+            border: 1px solid rgba(240, 165, 0, 0.15);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .about-event-card .detail-item:hover {
+            background: rgba(240, 165, 0, 0.12);
+            border-color: rgba(240, 165, 0, 0.3);
+            transform: translateX(5px);
+        }
+
+        .about-event-card .detail-item span.detail-icon {
+            font-size: 1.2rem;
+        }
+
+        .about-event-card .detail-item span.detail-text {
+            color: #d0d0d0;
+            font-size: 0.95rem;
+        }
+
+        .about-event-card .winner-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, rgba(240, 165, 0, 0.2), rgba(255, 107, 0, 0.1));
+            border: 1px solid rgba(240, 165, 0, 0.4);
+            border-radius: 25px;
+            color: #f0a500;
+            font-weight: 700;
+            font-size: 0.95rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 5px rgba(240, 165, 0, 0.2); }
+            50% { box-shadow: 0 0 20px rgba(240, 165, 0, 0.4); }
+        }
+
+        /* Non-Tech Fun Grid */
+        .fun-events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .fun-card {
+            background: linear-gradient(135deg, rgba(30, 30, 60, 0.7) 0%, rgba(20, 20, 50, 0.7) 100%);
+            border: 2px solid rgba(255, 107, 0, 0.2);
+            border-radius: 18px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(40px) scale(0.95);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .fun-card.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .fun-card:hover {
+            border-color: rgba(255, 107, 0, 0.5);
+            box-shadow: 0 0 35px rgba(255, 107, 0, 0.2), 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(-8px);
+        }
+
+        .fun-card .fun-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .fun-card:hover .fun-icon {
+            transform: scale(1.15) rotate(-5deg);
+        }
+
+        .fun-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: #ff6b00;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .fun-card .fun-desc {
+            color: #b0a080;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .fun-card .fun-detail {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 0;
+            color: #d0d0d0;
+            font-size: 0.95rem;
+        }
+
+        .fun-card .fun-detail span:first-child {
+            font-size: 1rem;
+        }
+
+        .fun-card .fun-prize {
+            margin-top: 12px;
+            padding: 10px 16px;
+            background: linear-gradient(135deg, rgba(255, 107, 0, 0.12), rgba(240, 165, 0, 0.06));
+            border: 1px solid rgba(255, 107, 0, 0.3);
+            border-radius: 12px;
+            color: #f0a500;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        /* Staggered animation delays for fun cards */
+        .fun-card:nth-child(1) { transition-delay: 0.05s; }
+        .fun-card:nth-child(2) { transition-delay: 0.15s; }
+        .fun-card:nth-child(3) { transition-delay: 0.25s; }
+        .fun-card:nth-child(4) { transition-delay: 0.35s; }
+        .fun-card:nth-child(5) { transition-delay: 0.45s; }
+        .fun-card:nth-child(6) { transition-delay: 0.55s; }
+
+        /* Divider Line */
+        .about-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(240, 165, 0, 0.4), transparent);
+            margin: 50px 0;
+            border: none;
+        }
+
+        .about-content {
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            padding: 0;
+            margin-bottom: 40px;
+            box-shadow: none;
+        }
+
+        .about-content h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: #f0a500;
+            font-size: 1.5rem;
+            margin: 30px 0 15px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .about-content p {
+            color: #d0d0d0;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .about-content ul {
+            list-style: none;
+            margin: 15px 0 15px 20px;
+        }
+
+        .about-content li {
+            color: #d0d0d0;
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .about-content li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #f0a500;
+            font-size: 1.1rem;
+        }
+
+        .event-highlight {
+            background: linear-gradient(135deg, rgba(240, 165, 0, 0.1) 0%, rgba(255, 107, 0, 0.05) 100%);
+            border-left: 4px solid #f0a500;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .rounds-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .round-card {
+            background: linear-gradient(135deg, rgba(255, 107, 0, 0.1) 0%, rgba(240, 165, 0, 0.05) 100%);
+            border: 2px solid rgba(255, 107, 0, 0.4);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 0 15px rgba(255, 107, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .round-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(255, 107, 0, 0.3);
+            border-color: rgba(240, 165, 0, 0.6);
+        }
+
+        .round-card h4 {
+            font-family: 'Orbitron', sans-serif;
+            color: #ff6b00;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .round-card p {
+            color: #d0d0d0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .prize-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .prize-table th,
+        .prize-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(240, 165, 0, 0.2);
+        }
+
+        .prize-table th {
+            background: linear-gradient(135deg, rgba(240, 165, 0, 0.2) 0%, rgba(255, 107, 0, 0.1) 100%);
+            color: #f0a500;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .prize-table td {
+            color: #d0d0d0;
+        }
+
+        .back-to-home-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #f0a500 0%, #ff6b00 100%);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            font-family: 'Exo 2', sans-serif;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(240, 165, 0, 0.4);
+            margin-top: 30px;
+        }
+
+        .back-to-home-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(240, 165, 0, 0.8);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 20px;
+            }
+
+            .nav-logo {
+                font-size: 1.4rem;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: rgba(10, 14, 39, 0.98);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                gap: 20px;
+                padding: 30px 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .about-container {
+                padding: 40px 20px;
+            }
+
+            .about-title {
+                font-size: 1.8rem;
+            }
+
+            .about-content {
+                padding: 25px;
+            }
+
+            .rounds-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation for glow effect */
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(240, 165, 0, 0.5), 0 0 20px rgba(255, 107, 0, 0.3);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(240, 165, 0, 0.8), 0 0 30px rgba(255, 107, 0, 0.6);
+            }
+        }
+
+        /* Animate starfield */
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Galaxy background with animated stars */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(2px 2px at 20% 30%, #eee, rgba(238, 238, 238, 0)),
+                radial-gradient(2px 2px at 60% 70%, #fff, rgba(255, 255, 255, 0)),
+                radial-gradient(1px 1px at 50% 50%, #fff, rgba(255, 255, 255, 0)),
+                radial-gradient(1px 1px at 80% 10%, #fff, rgba(255, 255, 255, 0)),
+                radial-gradient(2px 2px at 90% 60%, #fff, rgba(255, 255, 255, 0)),
+                radial-gradient(1px 1px at 30% 80%, #fff, rgba(255, 255, 255, 0)),
+                linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0d0a1a 100%);
+            background-size: 200% 200%, 150% 150%, 180% 180%, 160% 160%, 200% 200%, 140% 140%, 100% 100%;
+            background-position: 0 0, 40% 60%, 20% 80%, 60% 20%, 80% 40%, 30% 50%, 0 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Intro Video Container */
+        .intro-video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .intro-video-container.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .intro-video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .skip-intro-btn {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            padding: 12px 24px;
+            background: rgba(240, 165, 0, 0.8);
+            color: #000;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            font-family: 'Exo 2', sans-serif;
+            transition: all 0.3s ease;
+            z-index: 10000;
+        }
+
+        .skip-intro-btn:hover {
+            background: rgba(240, 165, 0, 1);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(240, 165, 0, 0.8);
+        }
+
+        /* Main content */
+        .main-content {
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out 0.5s;
+            position: relative;
+            z-index: 1;
+        }
+
+        .main-content.show {
+            opacity: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: calc(100vh - 70px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(240, 165, 0, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            top: 20%;
+            left: 10%;
+            animation: float 8s ease-in-out infinite;
+            filter: blur(40px);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(255, 107, 0, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: 20%;
+            right: 10%;
+            animation: float 10s ease-in-out infinite 2s;
+            filter: blur(40px);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5rem;
+            font-weight: 900;
+            color: #f0a500;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            animation: glow 2s ease-in-out infinite;
+            text-shadow: 0 0 10px rgba(240, 165, 0, 0.5);
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(240, 165, 0, 0.5), 0 0 20px rgba(255, 107, 0, 0.3);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(240, 165, 0, 0.8), 0 0 30px rgba(255, 107, 0, 0.6);
+            }
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: #b0a080;
+            margin-bottom: 40px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, #f0a500 0%, #ff6b00 100%);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            border: none;
+            font-family: 'Exo 2', sans-serif;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(240, 165, 0, 0.4);
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(240, 165, 0, 0.8), 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .cta-button:active {
+            transform: translateY(-1px);
+        }
+
+        /* Certificates Banner */
+        .certificates-banner {
+            background: linear-gradient(135deg, rgba(240, 165, 0, 0.1) 0%, rgba(255, 107, 0, 0.05) 100%);
+            border: 2px solid rgba(240, 165, 0, 0.5);
+            border-radius: 10px;
+            padding: 20px 40px;
+            text-align: center;
+            margin: 40px 20px;
+            font-weight: 600;
+            color: #f0a500;
+            box-shadow: 0 0 15px rgba(240, 165, 0, 0.2);
+            animation: slideInDown 0.8s ease-out;
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Event Details Banner */
+        .event-details-banner {
+            background: linear-gradient(135deg, rgba(240, 165, 0, 0.15) 0%, rgba(255, 107, 0, 0.1) 100%);
+            border: 2px solid rgba(240, 165, 0, 0.4);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 900px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            box-shadow: 0 0 25px rgba(240, 165, 0, 0.25);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .detail-item {
+            text-align: center;
+        }
+
+        .detail-item h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: #f0a500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .detail-item p {
+            font-size: 1.1rem;
+            color: #e0e0e0;
+            font-weight: 600;
+        }
+
+        /* Events Section */
+        .events-section {
+            padding: 80px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #f0a500;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .event-card {
+            background: linear-gradient(135deg, rgba(30, 30, 60, 0.8) 0%, rgba(20, 20, 50, 0.8) 100%);
+            border: 2px solid rgba(240, 165, 0, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(240, 165, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .event-card:nth-child(1) { animation-delay: 0.1s; }
+        .event-card:nth-child(2) { animation-delay: 0.2s; }
+        .event-card:nth-child(3) { animation-delay: 0.3s; }
+        .event-card:nth-child(4) { animation-delay: 0.4s; }
+        .event-card:nth-child(5) { animation-delay: 0.5s; }
+
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(240, 165, 0, 0.1) 0%, transparent 70%);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .event-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(240, 165, 0, 0.8);
+            box-shadow: 0 0 30px rgba(240, 165, 0, 0.6), 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .event-card:hover::before {
+            top: -25%;
+            left: -25%;
+        }
+
+        .event-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .event-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: #f0a500;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .entry-fee-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b00 0%, #f0a500 100%);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            box-shadow: 0 0 10px rgba(255, 107, 0, 0.5);
+        }
+
+        .event-description {
+            color: #b0a080;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .rules-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .event-card.expanded .rules-container {
+            max-height: 500px;
+        }
+
+        .rules-list {
+            list-style: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(240, 165, 0, 0.2);
+        }
+
+        .rules-list li {
+            color: #d0d0d0;
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .rules-list li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #f0a500;
+        }
+
+        .expand-btn {
+            background: linear-gradient(135deg, rgba(240, 165, 0, 0.2) 0%, rgba(255, 107, 0, 0.1) 100%);
+            border: 1px solid rgba(240, 165, 0, 0.4);
+            color: #f0a500;
+            padding: 8px 16px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: 'Exo 2', sans-serif;
+            font-size: 0.85rem;
+        }
+
+        .expand-btn:hover {
+            background: linear-gradient(135deg, rgba(240, 165, 0, 0.4) 0%, rgba(255, 107, 0, 0.2) 100%);
+            box-shadow: 0 0 10px rgba(240, 165, 0, 0.3);
+        }
+
+        /* Category Headers */
+        .event-category {
+            margin-top: 60px;
+        }
+
+        .category-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: #ff6b00;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 107, 0, 0.3);
+        }
+
+        /* Event Poster */
+        .event-poster {
+            width: 100%;
+            border-radius: 10px;
+            border: 2px solid rgba(240, 165, 0, 0.4);
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .event-poster:hover {
+            border-color: rgba(240, 165, 0, 0.8);
+            box-shadow: 0 0 20px rgba(240, 165, 0, 0.4);
+            transform: scale(1.02);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding-top: 80px;
+            min-height: 100vh;
+        }
+
+        .contact-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        .contact-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: #f0a500;
+            text-align: center;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        .contact-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #b0a080;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .contact-info-card {
+            background: linear-gradient(135deg, rgba(30, 30, 60, 0.7) 0%, rgba(20, 20, 50, 0.7) 100%);
+            border: 2px solid rgba(240, 165, 0, 0.2);
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: 0 0 20px rgba(240, 165, 0, 0.08);
+        }
+
+        .contact-info-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: #f0a500;
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(240, 165, 0, 0.1);
+        }
+
+        .contact-detail:last-child {
+            border-bottom: none;
+        }
+
+        .contact-detail-icon {
+            font-size: 1.5rem;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(240, 165, 0, 0.15), rgba(255, 107, 0, 0.08));
+            border-radius: 12px;
+            border: 1px solid rgba(240, 165, 0, 0.3);
+            flex-shrink: 0;
+        }
+
+        .contact-detail-text {
+            color: #d0d0d0;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .contact-detail-text strong {
+            color: #f0a500;
+            display: block;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 3px;
+        }
+
+        .contact-form-card {
+            background: linear-gradient(135deg, rgba(30, 30, 60, 0.7) 0%, rgba(20, 20, 50, 0.7) 100%);
+            border: 2px solid rgba(240, 165, 0, 0.2);
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: 0 0 20px rgba(240, 165, 0, 0.08);
+        }
+
+        .contact-form-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: #f0a500;
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #b0a080;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(10, 14, 39, 0.8);
+            border: 2px solid rgba(240, 165, 0, 0.2);
+            border-radius: 10px;
+            color: #e0e0e0;
+            font-family: 'Exo 2', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: rgba(240, 165, 0, 0.6);
+            box-shadow: 0 0 15px rgba(240, 165, 0, 0.15);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 14px 30px;
+            background: linear-gradient(135deg, #f0a500 0%, #ff6b00 100%);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            font-family: 'Exo 2', sans-serif;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(240, 165, 0, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(240, 165, 0, 0.8);
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-title {
+                font-size: 1.8rem;
+            }
+
+            .contact-container {
+                padding: 40px 20px;
+            }
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, rgba(10, 14, 39, 0.9) 0%, rgba(26, 31, 58, 0.9) 100%);
+            border-top: 2px solid rgba(240, 165, 0, 0.3);
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        footer p {
+            color: #b0a080;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        footer .college-name {
+            font-family: 'Orbitron', sans-serif;
+            color: #f0a500;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        footer .naac-badge {
+            color: #ff6b00;
+            font-weight: 600;
+        }
+
+        /* Scroll animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .event-details-banner {
+                grid-template-columns: 1fr;
+            }
+
+            .events-section {
+                padding: 40px 20px;
+            }
+
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skip-intro-btn {
+                bottom: 15px;
+                right: 15px;
+                padding: 10px 16px;
+                font-size: 12px;
+            }
+
+            .category-title {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            .cta-button {
+                padding: 12px 30px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Intro Video -->
+    <div class="intro-video-container" id="introVideo">
+        <video id="introVid" autoplay muted playsinline>
+            <source src="https://image2url.com/r2/default/videos/1771517402620-08cd8084-7442-49ad-bd83-8c128bc8e84c.mp4" type="video/mp4">
+        </video>
+        <button class="skip-intro-btn" id="skipBtn">Skip Intro</button>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">STELLAR<span>X</span></div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active" onclick="navigateTo('home')">Home</a></li>
+                <li><a href="#events" class="nav-link" onclick="navigateTo('events')">Events</a></li>
+                <li><a href="#about" class="nav-link" onclick="navigateTo('about')">About</a></li>
+                <li><a href="#contact" class="nav-link" onclick="navigateTo('contact')">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Home Section -->
+        <section id="home-section">
+            <!-- Hero Section -->
+            <section class="hero">
+            <div class="hero-content">
+                <h1>StellarX</h1>
+                <h2 style="font-family: 'Exo 2', sans-serif; font-size: 1.3rem; color: #b0a080; margin-bottom: 30px; font-weight: 300; letter-spacing: 1px;">
+                    Aircraft Contest
+                </h2>
+                <p>Department of Aerospace Engineering Proudly Presents</p>
+                <button class="cta-button" onclick="navigateTo('events')">
+                    Explore Events
+                </button>
+            </div>
+        </section>
+
+        </section>
+
+        <!-- About Section -->
+        <section id="about-section" class="about-section page-content" style="padding-top: 80px;">
+            <div class="about-container">
+                <h1 class="about-title">🚀 About STELLAR-X</h1>
+                <h2 class="about-subtitle">Innovation · Intelligence · Entertainment</h2>
+
+                <p class="about-intro-text">
+                    <strong>STELLAR-X</strong> is a vibrant blend of innovation, intelligence, and entertainment conducted by the <strong>Department of Aerospace Engineering</strong>. The event is designed to ignite creativity, test engineering excellence, and bring out the competitive spirit in every participant.<br><br>
+                    From building flying models to solving brain-teasing puzzles and physical challenges, <strong>STELLAR-X</strong> offers something for everyone!
+                </p>
+
+                <div class="about-content">
+
+                    <!-- ===== TECHNICAL ARENA ===== -->
+                    <h2 class="section-header-anim about-anim">🔥 Technical Arena</h2>
+                    <p class="section-header-sub about-anim">Where Engineering Excellence Meets Real-World Application</p>
+
+                    <!-- Aircraft Design Challenge -->
+                    <div class="about-event-card about-anim">
+                        <div class="card-header">
+                            <div class="card-icon">✈️</div>
+                            <div>
+                                <h3>Aircraft Design Challenge</h3>
+                                <p class="card-tagline">Step into the world of aerodynamics and aircraft modeling</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p>This event pushes teams to design and construct an aircraft model within a limited time frame using only the materials provided.</p>
+                            <h4>Event Structure</h4>
+                            <div class="detail-grid">
+                                <div class="detail-item"><span class="detail-icon">👥</span><span class="detail-text">Team Size: 3 members</span></div>
+                                <div class="detail-item"><span class="detail-icon">⏱️</span><span class="detail-text">Duration: 90 minutes</span></div>
+                                <div class="detail-item"><span class="detail-icon">📦</span><span class="detail-text">Materials provided on spot</span></div>
+                                <div class="detail-item"><span class="detail-icon">⚠️</span><span class="detail-text">Exceeding time = score deduction</span></div>
+                                <div class="detail-item"><span class="detail-icon">📋</span><span class="detail-text">Judged on feasibility & stability</span></div>
+                                <div class="detail-item"><span class="detail-icon">⚙️</span><span class="detail-text">Overall performance evaluated</span></div>
+                            </div>
+                            <div class="winner-badge">🏆 Most efficient & workable aircraft wins!</div>
+                        </div>
+                    </div>
+
+                    <!-- Helios Lift -->
+                    <div class="about-event-card from-right about-anim">
+                        <div class="card-header">
+                            <div class="card-icon">🎈</div>
+                            <div>
+                                <h3>Helios Lift</h3>
+                                <p class="card-tagline">Thermal Airship Challenge — inspired by hot air balloon principles</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p>Helios Lift challenges participants to create a working thermal airship model using given materials and specifications.</p>
+                            <h4>Event Structure</h4>
+                            <div class="detail-grid">
+                                <div class="detail-item"><span class="detail-icon">👥</span><span class="detail-text">Team Size: 3 members</span></div>
+                                <div class="detail-item"><span class="detail-icon">⏱️</span><span class="detail-text">Duration: 90 minutes</span></div>
+                                <div class="detail-item"><span class="detail-icon">📏</span><span class="detail-text">Strict adherence to guidelines</span></div>
+                                <div class="detail-item"><span class="detail-icon">⚠️</span><span class="detail-text">Late submissions = penalty</span></div>
+                                <div class="detail-item"><span class="detail-icon">🎯</span><span class="detail-text">Design accuracy judged</span></div>
+                                <div class="detail-item"><span class="detail-icon">⚙️</span><span class="detail-text">Functionality tested</span></div>
+                            </div>
+                            <div class="winner-badge">🏆 Most technically sound & successful model wins!</div>
+                        </div>
+                    </div>
+
+                    <!-- Crane Bridge -->
+                    <div class="about-event-card about-anim">
+                        <div class="card-header">
+                            <div class="card-icon">🌉</div>
+                            <div>
+                                <h3>Crane Bridge Contest</h3>
+                                <p class="card-tagline">Structural engineering meets creativity</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p>Construct a bridge-like structure that can withstand maximum load with given materials and design guidelines.</p>
+                            <h4>Event Structure</h4>
+                            <div class="detail-grid">
+                                <div class="detail-item"><span class="detail-icon">👥</span><span class="detail-text">Team Size: 3 members</span></div>
+                                <div class="detail-item"><span class="detail-icon">⏱️</span><span class="detail-text">Duration: 90 minutes</span></div>
+                                <div class="detail-item"><span class="detail-icon">📦</span><span class="detail-text">Materials & guidelines provided</span></div>
+                                <div class="detail-item"><span class="detail-icon">⚠️</span><span class="detail-text">Extra time = point reductions</span></div>
+                                <div class="detail-item"><span class="detail-icon">📋</span><span class="detail-text">Evaluated on set criteria</span></div>
+                                <div class="detail-item"><span class="detail-icon">⚙️</span><span class="detail-text">Most feasible design wins</span></div>
+                            </div>
+                            <div class="winner-badge">🏆 Strongest & most feasible bridge wins!</div>
+                        </div>
+                    </div>
+
+                    <hr class="about-divider">
+
+                    <!-- ===== NON-TECHNICAL FUN ZONE ===== -->
+                    <h2 class="section-header-anim about-anim">🎉 Non-Technical Fun Zone</h2>
+                    <p class="section-header-sub about-anim">Not just brains — we test skills, logic, speed, and strength too!</p>
+
+                    <div class="fun-events-grid">
+                        <!-- Dunk It -->
+                        <div class="fun-card about-anim">
+                            <span class="fun-icon">🏀</span>
+                            <h3>Dunk It</h3>
+                            <p class="fun-desc">Test your aim and accuracy.</p>
+                            <div class="fun-detail"><span>💰</span><span>Entry Fee: ₹20</span></div>
+                            <div class="fun-detail"><span>🎯</span><span>5 attempts from 10 feet distance</span></div>
+                            <div class="fun-detail"><span>✅</span><span>Score 3 successful shots to win</span></div>
+                            <div class="fun-prize">🎁 Prize: Keychain + Entry Fee refund</div>
+                        </div>
+
+                        <!-- Snake & Ladders -->
+                        <div class="fun-card about-anim">
+                            <span class="fun-icon">🎲</span>
+                            <h3>Snake & Ladders Face-Off</h3>
+                            <p class="fun-desc">A fast-paced board game challenge.</p>
+                            <div class="fun-detail"><span>💰</span><span>Entry Fee: ₹20</span></div>
+                            <div class="fun-detail"><span>🏆</span><span>Winner: Entry Fee + Keychain</span></div>
+                            <div class="fun-detail"><span>❌</span><span>No consolation prize</span></div>
+                            <div class="fun-prize">🏆 Winner takes all!</div>
+                        </div>
+
+                        <!-- Story Detective -->
+                        <div class="fun-card about-anim">
+                            <span class="fun-icon">🕵️</span>
+                            <h3>Story Detective</h3>
+                            <p class="fun-desc">Think fast. Arrange right.</p>
+                            <div class="fun-detail"><span>💰</span><span>Entry Fee: ₹30</span></div>
+                            <div class="fun-detail"><span>📖</span><span>Three shuffled story sets provided</span></div>
+                            <div class="fun-detail"><span>🧩</span><span>Arrange events in correct sequence</span></div>
+                            <div class="fun-prize">🧠 Logic & comprehension win!</div>
+                        </div>
+
+                        <!-- Binary Decode -->
+                        <div class="fun-card about-anim">
+                            <span class="fun-icon">🧠</span>
+                            <h3>Binary Decode</h3>
+                            <p class="fun-desc">Logical reasoning under time pressure.</p>
+                            <div class="fun-detail"><span>💰</span><span>Entry Fee: ₹30</span></div>
+                            <div class="fun-detail"><span>❓</span><span>5 questions · 40 sec each</span></div>
+                            <div class="fun-detail"><span>✅</span><span>Answer at least 3 with reasoning</span></div>
+                            <div class="fun-prize">🏆 Winner: Entry Fee + Keychain &nbsp;|&nbsp; 🍫 Others: Chocolate</div>
+                        </div>
+
+                        <!-- Push-Up Power Test -->
+                        <div class="fun-card about-anim">
+                            <span class="fun-icon">💪</span>
+                            <h3>Push-Up Power Test</h3>
+                            <p class="fun-desc">Strength challenge!</p>
+                            <div class="fun-detail"><span>💰</span><span>Entry Fee: ₹10</span></div>
+                            <div class="fun-detail"><span>🔥</span><span>100 push-ups within 100 seconds</span></div>
+                            <div class="fun-prize">🏆 Prize: ₹100</div>
+                        </div>
+
+                        <!-- Spring Legs -->
+                        <div class="fun-card about-anim">
+                            <span class="fun-icon">🦘</span>
+                            <h3>Spring Legs</h3>
+                            <p class="fun-desc">Jump beyond limits!</p>
+                            <div class="fun-detail"><span>💰</span><span>Entry Fee: ₹10</span></div>
+                            <div class="fun-detail"><span>📏</span><span>Minimum height: 240 cm</span></div>
+                            <div class="fun-prize">🏆 Prize: ₹50 + Keychain</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <button class="back-to-home-btn" onclick="navigateTo('home')">← Back to Home</button>
+            </div>
+        </section>
+
+        <!-- Events Section -->
+        <section id="events-section" class="events-section page-content" style="padding-top: 80px;">
+            <h2 class="section-title">Events</h2>
+
+            <!-- Technical Events -->
+            <div class="event-category scroll-reveal">
+                <h3 class="category-title">🚀 Technical Events</h3>
+                
+                <div class="events-grid">
+                    <!-- Aircraft Contest -->
+                    <div class="event-card">
+                        <img src="https://image2url.com/r2/default/images/1771549326006-6c190ef8-4da4-436b-8a59-6b088834cac3.jpeg" alt="Aircraft Contest Poster" class="event-poster" onclick="toggleRules(this.parentElement.querySelector('.expand-btn'))">
+                        <div class="event-icon">🛩️</div>
+                        <h3>Aircraft Contest</h3>
+                        <span class="entry-fee-badge">₹150/team</span>
+                        <p class="event-description">Build an aircraft with given guidelines & materials within 90 minutes</p>
+                        <div class="rules-container">
+                            <ul class="rules-list">
+                                <li>Only 3 members per team is allowed</li>
+                                <li>The participating teams should build an aircraft with the given guidelines and materials</li>
+                                <li>The time limit is 90 minutes</li>
+                                <li>The team that takes extra time will get point reductions</li>
+                                <li>The model made is evaluated with some criterias explained at the time of the event</li>
+                                <li>The team that has the most feasible design wins</li>
+                            </ul>
+                        </div>
+                        <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
+                    </div>
+
+                    <!-- Helios Lift -->
+                    <div class="event-card">
+                        <img src="https://image2url.com/r2/default/images/1771549393597-41341483-a4b3-493a-8596-66ed91054261.jpeg" alt="Helios Lift Poster" class="event-poster" onclick="toggleRules(this.parentElement.querySelector('.expand-btn'))">
+                        <div class="event-icon">🎈</div>
+                        <h3>Helios Lift</h3>
+                        <span class="entry-fee-badge">₹150/team</span>
+                        <p class="event-description">Build a thermal airship (hot air balloon) with given guidelines & materials</p>
+                        <div class="rules-container">
+                            <ul class="rules-list">
+                                <li>Only 3 members per team is allowed</li>
+                                <li>The participating teams should build the given thermal airship (hot air balloon) with the given guidelines and materials</li>
+                                <li>The time limit is 90 minutes</li>
+                                <li>The team that takes extra time will get point reductions</li>
+                                <li>The model made is evaluated with some criterias explained at the time of the event</li>
+                                <li>The team that has the most feasible design wins</li>
+                            </ul>
+                        </div>
+                        <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
+                    </div>
+
+                    <!-- Crane Bridge Contest -->
+                    <div class="event-card">
+                        <img src="https://image2url.com/r2/default/images/1771549438194-ea62b01f-30ae-43b7-9555-9375560a19af.jpeg" alt="Crane Bridge Contest Poster" class="event-poster" onclick="toggleRules(this.parentElement.querySelector('.expand-btn'))">
+                        <div class="event-icon">🌉</div>
+                        <h3>Crane Bridge Contest</h3>
+                        <span class="entry-fee-badge">₹150/team</span>
+                        <p class="event-description">Build a bridge-like structure with given guidelines & materials in 90 minutes</p>
+                        <div class="rules-container">
+                            <ul class="rules-list">
+                                <li>Only 3 members per team is allowed</li>
+                                <li>The participating teams should build a bridge like structure with the given guidelines and materials</li>
+                                <li>The time limit is 90 minutes</li>
+                                <li>The team that takes extra time will get point reductions</li>
+                                <li>The model made is evaluated with some criterias explained at the time of the event</li>
+                                <li>The team that has the most feasible design wins</li>
+                            </ul>
+                        </div>
+                        <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Non-Technical Events -->
+            <div class="event-category scroll-reveal">
+                <h3 class="category-title">🎯 Non-Technical Events</h3>
+                
+                <div class="events-grid">
+                    <!-- Dunk It -->
+                    <div class="event-card">
+                        <div class="event-icon">🏀</div>
+                        <h3>Dunk It</h3>
+                        <span class="entry-fee-badge">₹20/person</span>
+                        <p class="event-description">Throw the ball into the basket from 10 ft. Pot 3 dunks and win!</p>
+                        <div class="rules-container">
+                            <ul class="rules-list">
+                                <li>Entry fee: ₹20 per person</li>
+                                <li>Throw the ball into the basket from 10 ft</li>
+                                <li>Minimum 5 tries per person</li>
+                                <li>Pot 3 dunks → Win a keychain + entry fee refund</li>
+                            </ul>
+                        </div>
+                        <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
+                    </div>
+
+                    <!-- Snake and Ladders -->
+                    <div class="event-card">
+                        <div class="event-icon">🐍</div>
+                        <h3>Snake and Ladders</h3>
+                        <span class="entry-fee-badge">₹20</span>
+                        <p class="event-description">Classic Snake and Ladders – win and take home the prize!</p>
+                        <div class="rules-container">
+                            <ul class="rules-list">
+                                <li>Entry fee: ₹20</li>
+                                <li>Winner: Entry fee refund + Keychain</li>
+                                <li>Loser: None</li>
+                            </ul>
+                        </div>
+                        <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
+                    </div>
+
+                    <!-- Story Detective -->
+                    <div class="event-card">
+                        <div class="event-icon">📖</div>
+                        <h3>Story Detective</h3>
+                        <span class="entry-fee-badge">₹30</span>
+                        <p class="event-description">Find the correct order of shuffled story events</p>
+                        <div class="rules-container">
+                            <ul class="rules-list">
+                                <li>Entry fee: ₹30</li>
+                                <li>Events of a story are shuffled</li>
+                                <li>The player must find the correct order to win</li>
+                                <li>Minimum 3 tries (3 different stories)</li>
+                            </ul>
+                        </div>
+                        <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
+                    </div>
+
+                    <!-- Binary Decode -->
+                    <div class="event-card">
+                        <div class="event-icon">💻</div>
+                        <h3>Binary Decode</h3>
+                        <span class="entry-fee-badge">₹30</span>
+                        <p class="event-description">Solve logical reasoning puzzles with limited time</p>
+                        <div class="rules-container">
+                            <ul class="rules-list">
+                                <li>Entry fee: ₹30</li>
+                                <li>Players must answer logical reasoning puzzles</li>
+                                <li>Time limit: 40 seconds per question</li>
+                                <li>Must answer 3 out of 5 questions correctly</li>
+                                <li>Proper reasoning required for each answer</li>
+                                <li>Winner: Entry fee refund + Keychain 🔑</li>
+                                <li>Loser: Chocolate 🍫</li>
+                            </ul>
+                        </div>
+                        <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
+                    </div>
+
+                    <!-- Push Up Challenge -->
+                    <div class="event-card">
+                        <div class="event-icon">💪</div>
+                        <h3>Push Up Challenge</h3>
+                        <span class="entry-fee-badge">₹10</span>
+                        <p class="event-description">Do 100 push-ups within 100 seconds and win ₹100!</p>
+                        <div class="rules-container">
+                            <ul class="rules-list">
+                                <li>Entry fee: ₹10</li>
+                                <li>Do 100 push-ups within 100 seconds</li>
+                                <li>Prize: ₹100</li>
+                            </ul>
+                        </div>
+                        <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
+                    </div>
+
+                    <!-- Spring Legs -->
+                    <div class="event-card">
+                        <div class="event-icon">🦘</div>
+                        <h3>Spring Legs</h3>
+                        <span class="entry-fee-badge">₹10</span>
+                        <p class="event-description">Jump the highest with the given apparatus – minimum 240 cm!</p>
+                        <div class="rules-container">
+                            <ul class="rules-list">
+                                <li>Entry fee: ₹10</li>
+                                <li>Jump the highest with the given apparatus</li>
+                                <li>Minimum height: 240 cm</li>
+                                <li>Prize: ₹50 + Keychain</li>
+                            </ul>
+                        </div>
+                        <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certificates Banner -->
+            <div class="certificates-banner">
+                ✨ Certificates Provided for All Participants ✨
+            </div>
+
+            <!-- Event Details Banner -->
+            <div class="event-details-banner">
+                <div class="detail-item">
+                    <h3>📍 Venue</h3>
+                    <p>Biotech Block</p>
+                </div>
+                <div class="detail-item">
+                    <h3>⏰ Time</h3>
+                    <p>10:00 AM – 3:00 PM</p>
+                </div>
+                <div class="detail-item">
+                    <h3>🏆 Prize Pool</h3>
+                    <p>Winner ₹1000 / Runner ₹500</p>
+                </div>
+                <div class="detail-item">
+                    <h3>💳 Entry Fee</h3>
+                    <p>₹150/team (Technical)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact-section" class="contact-section page-content" style="padding-top: 80px;">
+            <div class="contact-container">
+                <h1 class="contact-title">📡 Contact Us</h1>
+                <p class="contact-subtitle">Get in touch with us for queries, registrations, or collaborations</p>
+
+                <div class="contact-grid">
+                    <!-- Contact Info -->
+                    <div class="contact-info-card">
+                        <h3>Reach Us</h3>
+
+                        <div class="contact-detail">
+                            <div class="contact-detail-icon">🏫</div>
+                            <div class="contact-detail-text">
+                                <strong>College</strong>
+                                Jeppiaar Engineering College
+                            </div>
+                        </div>
+
+                        <div class="contact-detail">
+                            <div class="contact-detail-icon">🚀</div>
+                            <div class="contact-detail-text">
+                                <strong>Department</strong>
+                                Department of Aerospace Engineering
+                            </div>
+                        </div>
+
+                        <div class="contact-detail">
+                            <div class="contact-detail-icon">📧</div>
+                            <div class="contact-detail-text">
+                                <strong>Email</strong>
+                                aerospace@jeppiaar.ac.in
+                            </div>
+                        </div>
+
+                        <div class="contact-detail">
+                            <div class="contact-detail-icon">🎓</div>
+                            <div class="contact-detail-text">
+                                <strong>Student Co-ordinator</strong>
+                                Vishnu — +91 9363647063
+                            </div>
+                        </div>
+
+                        <div class="contact-detail">
+                            <div class="contact-detail-icon">👨‍🏫</div>
+                            <div class="contact-detail-text">
+                                <strong>Faculty Co-ordinator</strong>
+                                Mr. S. Mahendiran — 9003040085
+                            </div>
+                        </div>
+
+                        <div class="contact-detail">
+                            <div class="contact-detail-icon">📸</div>
+                            <div class="contact-detail-text">
+                                <strong>Instagram</strong>
+                                @stellarx_aero
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="contact-form-card">
+                        <h3>Send a Message</h3>
+                        <form onsubmit="event.preventDefault(); alert('Message sent successfully!'); this.reset();">
+                            <div class="form-group">
+                                <label for="contact-name">Name</label>
+                                <input type="text" id="contact-name" placeholder="Your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-email">Email</label>
+                                <input type="email" id="contact-email" placeholder="Your email address" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-message">Message</label>
+                                <textarea id="contact-message" placeholder="Your message or query..." required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+
+                <button class="back-to-home-btn" onclick="navigateTo('home')">← Back to Home</button>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer style="display: none;">
+            <p class="college-name">Jeppiaar Engineering College</p>
+            <p>Department of Aerospace Engineering</p>
+            <p class="naac-badge">NAAC 'A' Grade Institution</p>
+            <p style="margin-top: 20px; font-size: 0.9rem; color: #808080;">StellarX - Aerospace Engineering Event</p>
+        </footer>
+    </div>
+
+    <script>
+        // Intro video handling
+        const introVideo = document.getElementById('introVideo');
+        const mainContent = document.getElementById('mainContent');
+        const videoElement = document.getElementById('introVid');
+        const skipBtn = document.getElementById('skipBtn');
+
+        let introComplete = false;
+
+        // Auto-fade after 5 seconds or when video ends
+        function completeIntro() {
+            if (introComplete) return;
+            introComplete = true;
+            
+            introVideo.classList.add('fade-out');
+            mainContent.classList.add('show');
+        }
+
+        // Skip button functionality
+        skipBtn.addEventListener('click', completeIntro);
+
+        // Video ended event
+        videoElement.addEventListener('ended', completeIntro);
+
+        // 5-second timeout
+        setTimeout(completeIntro, 5000);
+
+        // Navigation functionality
+        function navigateTo(page) {
+            // Hide all page content sections
+            document.querySelectorAll('.page-content').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Hide home section separately
+            const homeSection = document.getElementById('home-section');
+            const footerEl = document.querySelector('footer');
+            if (homeSection) {
+                homeSection.style.display = page === 'home' ? 'block' : 'none';
+                if (page === 'home') {
+                    homeSection.classList.add('active');
+                }
+            }
+
+            // Hide footer on home page, show on others
+            if (footerEl) {
+                footerEl.style.display = page === 'home' ? 'none' : 'block';
+            }
+
+            // Show selected section
+            if (page === 'about') {
+                document.getElementById('about-section').classList.add('active');
+            } else if (page === 'events') {
+                document.getElementById('events-section').classList.add('active');
+            } else if (page === 'contact') {
+                document.getElementById('contact-section').classList.add('active');
+            }
+
+            // Update nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
+
+            // Close mobile menu
+            document.getElementById('hamburger').classList.remove('active');
+            document.getElementById('navMenu').classList.remove('active');
+
+            // Scroll to top
+            window.scrollTo(0, 70);
+        }
+
+        // Hamburger menu toggle
+        document.getElementById('hamburger').addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.getElementById('navMenu').classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                document.getElementById('hamburger').classList.remove('active');
+                document.getElementById('navMenu').classList.remove('active');
+            });
+        });
+
+        // Toggle rules expansion
+        function toggleRules(btn) {
+            const card = btn.closest('.event-card');
+            card.classList.toggle('expanded');
+            btn.textContent = card.classList.contains('expanded') ? 'Hide Rules' : 'View Rules';
+        }
+
+        // Scroll reveal animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all scroll-reveal elements
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // About page animated elements observer
+        const aboutObserverOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const aboutObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    aboutObserver.unobserve(entry.target);
+                }
+            });
+        }, aboutObserverOptions);
+
+        document.querySelectorAll('.about-anim').forEach(el => {
+            aboutObserver.observe(el);
+        });
+
+        // Re-trigger animations when navigating to About page
+        const origNavigateTo = navigateTo;
+        navigateTo = function(page) {
+            origNavigateTo(page);
+            if (page === 'about') {
+                setTimeout(() => {
+                    document.querySelectorAll('.about-anim').forEach(el => {
+                        el.classList.remove('visible');
+                    });
+                    setTimeout(() => {
+                        document.querySelectorAll('.about-anim').forEach((el, i) => {
+                            setTimeout(() => {
+                                el.classList.add('visible');
+                            }, i * 120);
+                        });
+                    }, 100);
+                }, 50);
+            }
+        };
+
+        // Smooth scroll behavior for CTA button
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
