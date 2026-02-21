@@ -139,9 +139,10 @@
         }
 
         .about-container {
-            max-width: 1100px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 60px 40px;
+            width: 90%;
         }
 
         .about-title {
@@ -152,6 +153,7 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             animation: glow 2s ease-in-out infinite;
+            text-align: center;
         }
 
         .about-subtitle {
@@ -159,6 +161,7 @@
             color: #ff6b00;
             margin-bottom: 30px;
             letter-spacing: 1px;
+            text-align: center;
         }
 
         .about-intro-text {
@@ -166,8 +169,8 @@
             color: #d0d0d0;
             line-height: 2;
             margin-bottom: 40px;
-            text-align: center;
-            max-width: 850px;
+            text-align: justify;
+            max-width: 100%;
             margin-left: auto;
             margin-right: auto;
         }
@@ -1138,6 +1141,70 @@
             transform: scale(1.02);
         }
 
+        /* Poster Lightbox Modal */
+        .poster-lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+            animation: fadeInLightbox 0.3s ease;
+        }
+
+        .poster-lightbox.active {
+            display: flex;
+        }
+
+        @keyframes fadeInLightbox {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .poster-lightbox img {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 14px;
+            border: 3px solid rgba(240, 165, 0, 0.5);
+            box-shadow: 0 0 60px rgba(240, 165, 0, 0.3);
+            animation: zoomIn 0.3s ease;
+            cursor: default;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.7); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .poster-lightbox .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 2.5rem;
+            color: #f0a500;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(240, 165, 0, 0.4);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10001;
+        }
+
+        .poster-lightbox .lightbox-close:hover {
+            background: rgba(240, 165, 0, 0.2);
+            transform: rotate(90deg);
+        }
+
         /* Event Registration Button */
         .register-btn-container {
             text-align: center;
@@ -1638,49 +1705,19 @@
                 <h2 class="about-subtitle">Innovation · Intelligence · Entertainment</h2>
 
                 <p class="about-intro-text">
-                    The Department of Aerospace Engineering<br>
-                    proudly presents <em>StellarX</em>, a dynamic<br>
-                    and forward-thinking symposium designed to<br>
-                    bring together innovation, creativity, and<br>
-                    talent under one inspiring platform.<br><br>
-
-                    This grand event features a<br>
-                    wide range of thoughtfully curated<br>
-                    technical and non-technical programs aimed<br>
-                    at nurturing knowledge, enhancing practical<br>
-                    skills, and encouraging teamwork and<br>
-                    leadership among participants.<br><br>
-
-                    Every competition, workshop, and interactive<br>
-                    session has been meticulously planned<br>
-                    with dedication and attention to<br>
-                    detail to ensure a meaningful<br>
-                    and enriching experience for all attendees.<br><br>
-
-                    StellarX is not just an event;<br>
-                    it is an opportunity to explore<br>
-                    new ideas, challenge your abilities,<br>
-                    and connect with like-minded individuals<br>
-                    who share a passion for<br>
-                    growth and excellence.<br><br>
-
-                    Your enthusiastic participation plays a<br>
-                    vital role in elevating this<br>
-                    symposium to greater heights, transforming<br>
-                    it into a vibrant celebration<br>
-                    of innovation and collaboration.<br><br>
-
-                    By taking part in these<br>
-                    engaging activities, you will sharpen<br>
-                    your technical expertise, boost your<br>
-                    confidence, expand your perspective, and<br>
-                    create unforgettable memories filled with<br>
-                    learning and enjoyment.<br><br>
-
-                    Join us at StellarX and be<br>
-                    a part of an inspiring journey<br>
-                    that blends knowledge, creativity, competition,<br>
-                    and entertainment into one extraordinary experience.
+                    The Department of Aerospace Engineering proudly presents <em>StellarX</em>, a dynamic and forward-thinking symposium designed to bring together innovation, creativity, and talent under one inspiring platform.
+                    <br><br>
+                    This grand event features a wide range of thoughtfully curated technical and non-technical programs aimed at nurturing knowledge, enhancing practical skills, and encouraging teamwork and leadership among participants.
+                    <br><br>
+                    Every competition, workshop, and interactive session has been meticulously planned with dedication and attention to detail to ensure a meaningful and enriching experience for all attendees.
+                    <br><br>
+                    StellarX is not just an event; it is an opportunity to explore new ideas, challenge your abilities, and connect with like-minded individuals who share a passion for growth and excellence.
+                    <br><br>
+                    Your enthusiastic participation plays a vital role in elevating this symposium to greater heights, transforming it into a vibrant celebration of innovation and collaboration.
+                    <br><br>
+                    By taking part in these engaging activities, you will sharpen your technical expertise, boost your confidence, expand your perspective, and create unforgettable memories filled with learning and enjoyment.
+                    <br><br>
+                    Join us at StellarX and be a part of an inspiring journey that blends knowledge, creativity, competition, and entertainment into one extraordinary experience.
                 </p>
 
                 <button class="back-to-home-btn" onclick="navigateTo('home')">← Back to Home</button>
@@ -1698,7 +1735,7 @@
                 <div class="events-grid">
                     <!-- Aircraft Contest -->
                     <div class="event-card">
-                        <img src="https://image2url.com/r2/default/images/1771549326006-6c190ef8-4da4-436b-8a59-6b088834cac3.jpeg" alt="Aircraft Contest Poster" class="event-poster" onclick="toggleRules(this.parentElement.querySelector('.expand-btn'))">
+                        <img src="https://i.ibb.co/60kwRnsv/60677b87-d1ec-4189-b37f-3e5a8eb993bb.png" alt="Aircraft Contest Poster" class="event-poster" onclick="openPosterLightbox(this.src)">
                         <div class="event-icon">🛩️</div>
                         <h3>Aircraft Contest</h3>
                         <span class="entry-fee-badge">₹150/team</span>
@@ -1718,7 +1755,7 @@
 
                     <!-- Helios Lift -->
                     <div class="event-card">
-                        <img src="https://image2url.com/r2/default/images/1771549393597-41341483-a4b3-493a-8596-66ed91054261.jpeg" alt="Helios Lift Poster" class="event-poster" onclick="toggleRules(this.parentElement.querySelector('.expand-btn'))">
+                        <img src="https://image2url.com/r2/default/images/1771549393597-41341483-a4b3-493a-8596-66ed91054261.jpeg" alt="Helios Lift Poster" class="event-poster" onclick="openPosterLightbox(this.src)">
                         <div class="event-icon">🎈</div>
                         <h3>Helios Lift</h3>
                         <span class="entry-fee-badge">₹150/team</span>
@@ -1738,7 +1775,7 @@
 
                     <!-- Crane Bridge Contest -->
                     <div class="event-card">
-                        <img src="https://image2url.com/r2/default/images/1771549438194-ea62b01f-30ae-43b7-9555-9375560a19af.jpeg" alt="Crane Bridge Contest Poster" class="event-poster" onclick="toggleRules(this.parentElement.querySelector('.expand-btn'))">
+                        <img src="https://i.ibb.co/Fb18VjzC/Whats-App-Image-2026-02-21-at-12-50-35-AM.jpg" alt="Crane Bridge Contest Poster" class="event-poster" onclick="openPosterLightbox(this.src)">
                         <div class="event-icon">🌉</div>
                         <h3>Crane Bridge Contest</h3>
                         <span class="entry-fee-badge">₹150/team</span>
@@ -1752,6 +1789,8 @@
                                 <li>The model made is evaluated with some criterias explained at the time of the event</li>
                                 <li>The team that has the most feasible design wins</li>
                             </ul>
+                            <a href="https://online.flippingbook.com/view/559449465/" class="fbo-embed" data-fbo-id="a7d0200ca2" data-fbo-ratio="3:2" data-fbo-lightbox="yes" data-fbo-width="100%" data-fbo-height="auto" data-fbo-version="1" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 15px; padding: 10px 20px; background: linear-gradient(135deg, rgba(240, 165, 0, 0.2), rgba(255, 107, 0, 0.1)); border: 1px solid rgba(240, 165, 0, 0.4); border-radius: 12px; color: #f0a500; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: all 0.3s ease; max-width: 100%;" onmouseover="this.style.background='linear-gradient(135deg, rgba(240,165,0,0.35), rgba(255,107,0,0.2))'; this.style.boxShadow='0 0 15px rgba(240,165,0,0.3)';" onmouseout="this.style.background='linear-gradient(135deg, rgba(240,165,0,0.2), rgba(255,107,0,0.1))'; this.style.boxShadow='none';">📄 Rule Book</a>
+                            <script async defer src="https://online.flippingbook.com/EmbedScriptUrl.aspx?m=redir&hid=559449465"></script>
                         </div>
                         <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
                     </div>
@@ -1957,9 +1996,15 @@
                             <div class="contact-detail-icon">📸</div>
                             <div class="contact-detail-text">
                                 <strong>Instagram</strong>
-                                @stellarx_aero
+                                @stellarx_26
                             </div>
                         </div>
+
+                        <!-- WhatsApp Direct Message -->
+                        <a href="https://wa.me/919363647063?text=Hi%20Vishnu%2C%20I%20have%20a%20query%20regarding%20StellarX%20event." target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 12px; margin-top: 20px; padding: 14px 24px; background: linear-gradient(135deg, #25D366, #128C7E); border: none; border-radius: 14px; color: #fff; font-weight: 700; font-size: 1rem; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); cursor: pointer;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(37,211,102,0.45)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(37,211,102,0.3)';">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                            Message Student Coordinator
+                        </a>
                     </div>
 
                     <!-- Contact Form -->
@@ -1986,6 +2031,12 @@
                 <button class="back-to-home-btn" onclick="navigateTo('home')">← Back to Home</button>
             </div>
         </section>
+
+        <!-- Poster Lightbox Modal -->
+        <div class="poster-lightbox" id="posterLightbox" onclick="closePosterLightbox(event)">
+            <span class="lightbox-close" onclick="closePosterLightbox(event)">✕</span>
+            <img id="lightboxImg" src="" alt="Event Poster">
+        </div>
 
         <!-- Footer -->
         <footer style="display: none;">
@@ -2082,6 +2133,28 @@
                 document.getElementById('hamburger').classList.remove('active');
                 document.getElementById('navMenu').classList.remove('active');
             });
+        });
+
+        // Poster Lightbox
+        function openPosterLightbox(src) {
+            const lightbox = document.getElementById('posterLightbox');
+            const img = document.getElementById('lightboxImg');
+            img.src = src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePosterLightbox(e) {
+            if (e.target.id === 'lightboxImg') return;
+            const lightbox = document.getElementById('posterLightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePosterLightbox({target: document.getElementById('posterLightbox')});
+            }
         });
 
         // Toggle rules expansion
