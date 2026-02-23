@@ -2452,7 +2452,7 @@
                         <div class="about-highlight-icon">🎯</div>
                         <div class="about-highlight-text">
                             <h4>Fun Events</h4>
-                            <p>Dunk It, Snake & Ladders, Push-ups, Binary Decode & more!</p>
+                            <p>Dunk It, Snake & Ladders, Push-ups, Binary Decode, Do or Die & more!</p>
                         </div>
                     </div>
                 </div>
@@ -2466,8 +2466,8 @@
                 </p>
 
                 <div class="page-nav-row">
-                    <button class="back-to-home-btn" onclick="navigateTo('home')">← Back to Home</button>
-                    <button class="back-to-home-btn" onclick="navigateTo('events')">Events →</button>
+                    <button class="back-to-home-btn" onclick="navigateTo('events')">← Events</button>
+                    <button class="back-to-home-btn" onclick="navigateTo('contact')">Contact →</button>
                 </div>
             </div>
         </section>
@@ -2562,37 +2562,24 @@
 
             <!-- Non-Technical Events -->
             <div class="event-category scroll-reveal">
-                <h3 class="category-title">🎯 Non-Technical Events <span class="category-count">6</span></h3>
+                <h3 class="category-title">🎯 Non-Technical Events <span class="category-count">3</span></h3>
                 
                 <div class="events-grid">
-                    <!-- Dunk It -->
+                    <!-- Binary Decode -->
                     <div class="event-card">
-                        <div class="event-icon">🏀</div>
-                        <h3>Dunk It</h3>
-                        <span class="entry-fee-badge">₹20/person</span>
-                        <p class="event-description">Throw the ball into the basket from 10 ft. Pot 3 dunks and win!</p>
+                        <div class="event-icon">💻</div>
+                        <h3>Binary Decode</h3>
+                        <span class="entry-fee-badge">₹30</span>
+                        <p class="event-description">Solve logical reasoning puzzles with limited time</p>
                         <div class="rules-container">
                             <ul class="rules-list">
-                                <li>Entry fee: ₹20 per person</li>
-                                <li>Throw the ball into the basket from 10 ft</li>
-                                <li>Minimum 5 tries per person</li>
-                                <li>Pot 3 dunks → Win a keychain + entry fee refund</li>
-                            </ul>
-                        </div>
-                        <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
-                    </div>
-
-                    <!-- Snake and Ladders -->
-                    <div class="event-card">
-                        <div class="event-icon">🐍</div>
-                        <h3>Snake and Ladders</h3>
-                        <span class="entry-fee-badge">₹20</span>
-                        <p class="event-description">Classic Snake and Ladders – win and take home the prize!</p>
-                        <div class="rules-container">
-                            <ul class="rules-list">
-                                <li>Entry fee: ₹20</li>
-                                <li>Winner: Entry fee refund + Keychain</li>
-                                <li>Loser: None</li>
+                                <li>Entry fee: ₹30</li>
+                                <li>Players must answer logical reasoning puzzles</li>
+                                <li>Time limit: 40 seconds per question</li>
+                                <li>Must answer 3 out of 5 questions correctly</li>
+                                <li>Proper reasoning required for each answer</li>
+                                <li>Winner: Entry fee refund + Keychain 🔑</li>
+                                <li>Loser: Chocolate 🍫</li>
                             </ul>
                         </div>
                         <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
@@ -2615,26 +2602,30 @@
                         <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
                     </div>
 
-                    <!-- Binary Decode -->
+                    <!-- Do or Die -->
                     <div class="event-card">
-                        <div class="event-icon">💻</div>
-                        <h3>Binary Decode</h3>
+                        <div class="event-icon">🎲</div>
+                        <h3>Do or Die</h3>
                         <span class="entry-fee-badge">₹30</span>
-                        <p class="event-description">Solve logical reasoning puzzles with limited time</p>
+                        <p class="event-description">Face rapid-fire challenges – answer correctly or get eliminated!</p>
                         <div class="rules-container">
                             <ul class="rules-list">
                                 <li>Entry fee: ₹30</li>
-                                <li>Players must answer logical reasoning puzzles</li>
-                                <li>Time limit: 40 seconds per question</li>
-                                <li>Must answer 3 out of 5 questions correctly</li>
-                                <li>Proper reasoning required for each answer</li>
-                                <li>Winner: Entry fee refund + Keychain 🔑</li>
-                                <li>Loser: Chocolate 🍫</li>
+                                <li>Rapid-fire rounds with quick challenges</li>
+                                <li>Answer correctly to survive, wrong answer means elimination</li>
+                                <li>Minimum 3 tries (3 different rounds)</li>
                             </ul>
                         </div>
                         <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
                     </div>
+                </div>
+            </div>
 
+            <!-- On the Spot Registration Events -->
+            <div class="event-category scroll-reveal">
+                <h3 class="category-title">⚡ On the Spot Registration Events <span class="category-count">4</span></h3>
+                
+                <div class="events-grid">
                     <!-- Push Up Challenge -->
                     <div class="event-card">
                         <div class="event-icon">💪</div>
@@ -2663,6 +2654,39 @@
                                 <li>Jump the highest with the given apparatus</li>
                                 <li>Minimum height: 240 cm</li>
                                 <li>Prize: ₹50 + Keychain</li>
+                            </ul>
+                        </div>
+                        <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
+                    </div>
+
+                    <!-- Snake and Ladders -->
+                    <div class="event-card">
+                        <div class="event-icon">🐍</div>
+                        <h3>Snake and Ladders</h3>
+                        <span class="entry-fee-badge">₹20</span>
+                        <p class="event-description">Classic Snake and Ladders – win and take home the prize!</p>
+                        <div class="rules-container">
+                            <ul class="rules-list">
+                                <li>Entry fee: ₹20</li>
+                                <li>Winner: Entry fee refund + Keychain</li>
+                                <li>Loser: None</li>
+                            </ul>
+                        </div>
+                        <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
+                    </div>
+
+                    <!-- Dunk It -->
+                    <div class="event-card">
+                        <div class="event-icon">🏀</div>
+                        <h3>Dunk It</h3>
+                        <span class="entry-fee-badge">₹20/person</span>
+                        <p class="event-description">Throw the ball into the basket from 10 ft. Pot 3 dunks and win!</p>
+                        <div class="rules-container">
+                            <ul class="rules-list">
+                                <li>Entry fee: ₹20 per person</li>
+                                <li>Throw the ball into the basket from 10 ft</li>
+                                <li>Minimum 5 tries per person</li>
+                                <li>Pot 3 dunks → Win a keychain + entry fee refund</li>
                             </ul>
                         </div>
                         <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
@@ -2704,8 +2728,8 @@
             </div>
 
                 <div class="page-nav-row">
-                    <button class="back-to-home-btn" onclick="navigateTo('about')">← About</button>
-                    <button class="back-to-home-btn" onclick="navigateTo('contact')">Contact →</button>
+                    <button class="back-to-home-btn" onclick="navigateTo('home')">← Home</button>
+                    <button class="back-to-home-btn" onclick="navigateTo('about')">About →</button>
                 </div>
         </section>
 
@@ -2780,18 +2804,25 @@
                     <!-- Contact Form -->
                     <div class="contact-form-card">
                         <h3>Send a Message</h3>
-                        <form onsubmit="event.preventDefault(); alert('Message sent successfully!'); this.reset();">
+                        <form action="https://formsubmit.co/vishnuselvan2506@gmail.com" method="POST">
+                            <!-- FormSubmit Configuration -->
+                            <input type="hidden" name="_subject" value="New StellarX Contact Message">
+                            <input type="hidden" name="_captcha" value="true">
+                            <input type="hidden" name="_template" value="table">
+                            <input type="hidden" name="_next" value="https://kvigneshsivan-bot.github.io">
+                            <input type="text" name="_honey" style="display:none">
+
                             <div class="form-group">
                                 <label for="contact-name">Name</label>
-                                <input type="text" id="contact-name" placeholder="Your full name" required>
+                                <input type="text" id="contact-name" name="name" placeholder="Your full name" required>
                             </div>
                             <div class="form-group">
                                 <label for="contact-email">Email</label>
-                                <input type="email" id="contact-email" placeholder="Your email address" required>
+                                <input type="email" id="contact-email" name="email" placeholder="Your email address" required>
                             </div>
                             <div class="form-group">
                                 <label for="contact-message">Message</label>
-                                <textarea id="contact-message" placeholder="Your message or query..." required></textarea>
+                                <textarea id="contact-message" name="message" placeholder="Your message or query..." required></textarea>
                             </div>
                             <button type="submit" class="submit-btn">Send Message</button>
                         </form>
@@ -2799,7 +2830,7 @@
                 </div>
 
                 <div class="page-nav-row">
-                    <button class="back-to-home-btn" onclick="navigateTo('events')">← Events</button>
+                    <button class="back-to-home-btn" onclick="navigateTo('about')">← About</button>
                     <button class="back-to-home-btn" onclick="navigateTo('home')">Home →</button>
                 </div>
             </div>
@@ -3027,7 +3058,7 @@
 
         // ── Countdown Timer ──
         (function() {
-            const eventDate = new Date(2026, 1, 28, 10, 0, 0);
+            const eventDate = new Date(2026, 2, 4, 9, 0, 0);
             const countdownEl = document.getElementById('eventCountdown');
             if (!countdownEl) return;
 

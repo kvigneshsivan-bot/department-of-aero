@@ -37,6 +37,143 @@
             background: #f0a500;
         }
 
+        /* Solar System Animation */
+        .solar-system {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .solar-system .sun {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 30px; height: 30px;
+            margin: -15px 0 0 -15px;
+            background: radial-gradient(circle, #ffe066 0%, #f0a500 40%, rgba(255, 107, 0, 0.6) 70%, transparent 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 40px rgba(240, 165, 0, 0.5), 0 0 80px rgba(255, 107, 0, 0.2);
+            animation: sunPulse 3s ease-in-out infinite;
+        }
+        @keyframes sunPulse {
+            0%, 100% { box-shadow: 0 0 40px rgba(240, 165, 0, 0.5), 0 0 80px rgba(255, 107, 0, 0.2); }
+            50% { box-shadow: 0 0 60px rgba(240, 165, 0, 0.7), 0 0 120px rgba(255, 107, 0, 0.35); }
+        }
+        .orbit {
+            position: absolute;
+            top: 50%; left: 50%;
+            border: 1px solid rgba(240, 165, 0, 0.06);
+            border-radius: 50%;
+            animation: orbitRotate linear infinite;
+        }
+        .orbit .planet {
+            position: absolute;
+            top: -4px; left: 50%;
+            border-radius: 50%;
+            transform: translateX(-50%);
+        }
+        @keyframes orbitRotate {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        /* Orbit 1 - Mercury */
+        .orbit-1 {
+            width: 120px; height: 120px;
+            animation-duration: 8s;
+        }
+        .orbit-1 .planet {
+            width: 5px; height: 5px;
+            background: #b0b0b0;
+            box-shadow: 0 0 6px rgba(176, 176, 176, 0.6);
+        }
+        /* Orbit 2 - Venus */
+        .orbit-2 {
+            width: 190px; height: 190px;
+            animation-duration: 13s;
+        }
+        .orbit-2 .planet {
+            width: 7px; height: 7px;
+            background: #e8a838;
+            box-shadow: 0 0 8px rgba(232, 168, 56, 0.6);
+        }
+        /* Orbit 3 - Earth */
+        .orbit-3 {
+            width: 270px; height: 270px;
+            animation-duration: 18s;
+        }
+        .orbit-3 .planet {
+            width: 8px; height: 8px;
+            background: #4a9ff5;
+            box-shadow: 0 0 10px rgba(74, 159, 245, 0.7);
+        }
+        /* Orbit 4 - Mars */
+        .orbit-4 {
+            width: 360px; height: 360px;
+            animation-duration: 25s;
+        }
+        .orbit-4 .planet {
+            width: 6px; height: 6px;
+            background: #e05535;
+            box-shadow: 0 0 8px rgba(224, 85, 53, 0.6);
+        }
+        /* Orbit 5 - Jupiter */
+        .orbit-5 {
+            width: 480px; height: 480px;
+            animation-duration: 35s;
+        }
+        .orbit-5 .planet {
+            width: 14px; height: 14px;
+            background: radial-gradient(circle, #d4a56a 30%, #c4884a 100%);
+            box-shadow: 0 0 15px rgba(212, 165, 106, 0.5);
+        }
+        /* Orbit 6 - Saturn */
+        .orbit-6 {
+            width: 600px; height: 600px;
+            animation-duration: 45s;
+        }
+        .orbit-6 .planet {
+            width: 12px; height: 12px;
+            background: #e8d082;
+            box-shadow: 0 0 12px rgba(232, 208, 130, 0.5);
+            position: relative;
+        }
+        .orbit-6 .planet::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 22px; height: 6px;
+            margin: -3px 0 0 -11px;
+            border: 1px solid rgba(232, 208, 130, 0.4);
+            border-radius: 50%;
+            background: transparent;
+        }
+        /* Orbit 7 - Uranus */
+        .orbit-7 {
+            width: 730px; height: 730px;
+            animation-duration: 58s;
+        }
+        .orbit-7 .planet {
+            width: 9px; height: 9px;
+            background: #7ecfc0;
+            box-shadow: 0 0 10px rgba(126, 207, 192, 0.5);
+        }
+        /* Orbit 8 - Neptune */
+        .orbit-8 {
+            width: 850px; height: 850px;
+            animation-duration: 72s;
+        }
+        .orbit-8 .planet {
+            width: 9px; height: 9px;
+            background: #4470e8;
+            box-shadow: 0 0 12px rgba(68, 112, 232, 0.6);
+        }
+        @media (max-width: 768px) {
+            .orbit-5, .orbit-6, .orbit-7, .orbit-8 {
+                display: none;
+            }
+        }
+
         /* Navigation Styles */
         .navbar {
             position: fixed;
@@ -2342,6 +2479,19 @@
     </style>
 </head>
 <body>
+    <!-- Solar System Background -->
+    <div class="solar-system">
+        <div class="sun"></div>
+        <div class="orbit orbit-1"><div class="planet"></div></div>
+        <div class="orbit orbit-2"><div class="planet"></div></div>
+        <div class="orbit orbit-3"><div class="planet"></div></div>
+        <div class="orbit orbit-4"><div class="planet"></div></div>
+        <div class="orbit orbit-5"><div class="planet"></div></div>
+        <div class="orbit orbit-6"><div class="planet"></div></div>
+        <div class="orbit orbit-7"><div class="planet"></div></div>
+        <div class="orbit orbit-8"><div class="planet"></div></div>
+    </div>
+
     <!-- Intro Video -->
     <div class="intro-video-container" id="introVideo">
         <video id="introVid" autoplay muted playsinline>
@@ -2452,7 +2602,7 @@
                         <div class="about-highlight-icon">🎯</div>
                         <div class="about-highlight-text">
                             <h4>Fun Events</h4>
-                            <p>Dunk It, Snake & Ladders, Push-ups, Binary Decode & more!</p>
+                            <p>Dunk It, Snake & Ladders, Push-ups, Binary Decode, Do or Die & more!</p>
                         </div>
                     </div>
                 </div>
@@ -2466,8 +2616,8 @@
                 </p>
 
                 <div class="page-nav-row">
-                    <button class="back-to-home-btn" onclick="navigateTo('home')">← Back to Home</button>
-                    <button class="back-to-home-btn" onclick="navigateTo('events')">Events →</button>
+                    <button class="back-to-home-btn" onclick="navigateTo('events')">← Events</button>
+                    <button class="back-to-home-btn" onclick="navigateTo('contact')">Contact →</button>
                 </div>
             </div>
         </section>
@@ -2562,37 +2712,24 @@
 
             <!-- Non-Technical Events -->
             <div class="event-category scroll-reveal">
-                <h3 class="category-title">🎯 Non-Technical Events <span class="category-count">6</span></h3>
+                <h3 class="category-title">🎯 Non-Technical Events <span class="category-count">3</span></h3>
                 
                 <div class="events-grid">
-                    <!-- Dunk It -->
+                    <!-- Binary Decode -->
                     <div class="event-card">
-                        <div class="event-icon">🏀</div>
-                        <h3>Dunk It</h3>
-                        <span class="entry-fee-badge">₹20/person</span>
-                        <p class="event-description">Throw the ball into the basket from 10 ft. Pot 3 dunks and win!</p>
+                        <div class="event-icon">💻</div>
+                        <h3>Binary Decode</h3>
+                        <span class="entry-fee-badge">₹30</span>
+                        <p class="event-description">Solve logical reasoning puzzles with limited time</p>
                         <div class="rules-container">
                             <ul class="rules-list">
-                                <li>Entry fee: ₹20 per person</li>
-                                <li>Throw the ball into the basket from 10 ft</li>
-                                <li>Minimum 5 tries per person</li>
-                                <li>Pot 3 dunks → Win a keychain + entry fee refund</li>
-                            </ul>
-                        </div>
-                        <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
-                    </div>
-
-                    <!-- Snake and Ladders -->
-                    <div class="event-card">
-                        <div class="event-icon">🐍</div>
-                        <h3>Snake and Ladders</h3>
-                        <span class="entry-fee-badge">₹20</span>
-                        <p class="event-description">Classic Snake and Ladders – win and take home the prize!</p>
-                        <div class="rules-container">
-                            <ul class="rules-list">
-                                <li>Entry fee: ₹20</li>
-                                <li>Winner: Entry fee refund + Keychain</li>
-                                <li>Loser: None</li>
+                                <li>Entry fee: ₹30</li>
+                                <li>Players must answer logical reasoning puzzles</li>
+                                <li>Time limit: 40 seconds per question</li>
+                                <li>Must answer 3 out of 5 questions correctly</li>
+                                <li>Proper reasoning required for each answer</li>
+                                <li>Winner: Entry fee refund + Keychain 🔑</li>
+                                <li>Loser: Chocolate 🍫</li>
                             </ul>
                         </div>
                         <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
@@ -2615,26 +2752,30 @@
                         <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
                     </div>
 
-                    <!-- Binary Decode -->
+                    <!-- Do or Die -->
                     <div class="event-card">
-                        <div class="event-icon">💻</div>
-                        <h3>Binary Decode</h3>
+                        <div class="event-icon">🎲</div>
+                        <h3>Do or Die</h3>
                         <span class="entry-fee-badge">₹30</span>
-                        <p class="event-description">Solve logical reasoning puzzles with limited time</p>
+                        <p class="event-description">Face rapid-fire challenges – answer correctly or get eliminated!</p>
                         <div class="rules-container">
                             <ul class="rules-list">
                                 <li>Entry fee: ₹30</li>
-                                <li>Players must answer logical reasoning puzzles</li>
-                                <li>Time limit: 40 seconds per question</li>
-                                <li>Must answer 3 out of 5 questions correctly</li>
-                                <li>Proper reasoning required for each answer</li>
-                                <li>Winner: Entry fee refund + Keychain 🔑</li>
-                                <li>Loser: Chocolate 🍫</li>
+                                <li>Rapid-fire rounds with quick challenges</li>
+                                <li>Answer correctly to survive, wrong answer means elimination</li>
+                                <li>Minimum 3 tries (3 different rounds)</li>
                             </ul>
                         </div>
                         <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
                     </div>
+                </div>
+            </div>
 
+            <!-- On the Spot Registration Events -->
+            <div class="event-category scroll-reveal">
+                <h3 class="category-title">⚡ On the Spot Registration Events <span class="category-count">4</span></h3>
+                
+                <div class="events-grid">
                     <!-- Push Up Challenge -->
                     <div class="event-card">
                         <div class="event-icon">💪</div>
@@ -2663,6 +2804,39 @@
                                 <li>Jump the highest with the given apparatus</li>
                                 <li>Minimum height: 240 cm</li>
                                 <li>Prize: ₹50 + Keychain</li>
+                            </ul>
+                        </div>
+                        <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
+                    </div>
+
+                    <!-- Snake and Ladders -->
+                    <div class="event-card">
+                        <div class="event-icon">🐍</div>
+                        <h3>Snake and Ladders</h3>
+                        <span class="entry-fee-badge">₹20</span>
+                        <p class="event-description">Classic Snake and Ladders – win and take home the prize!</p>
+                        <div class="rules-container">
+                            <ul class="rules-list">
+                                <li>Entry fee: ₹20</li>
+                                <li>Winner: Entry fee refund + Keychain</li>
+                                <li>Loser: None</li>
+                            </ul>
+                        </div>
+                        <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
+                    </div>
+
+                    <!-- Dunk It -->
+                    <div class="event-card">
+                        <div class="event-icon">🏀</div>
+                        <h3>Dunk It</h3>
+                        <span class="entry-fee-badge">₹20/person</span>
+                        <p class="event-description">Throw the ball into the basket from 10 ft. Pot 3 dunks and win!</p>
+                        <div class="rules-container">
+                            <ul class="rules-list">
+                                <li>Entry fee: ₹20 per person</li>
+                                <li>Throw the ball into the basket from 10 ft</li>
+                                <li>Minimum 5 tries per person</li>
+                                <li>Pot 3 dunks → Win a keychain + entry fee refund</li>
                             </ul>
                         </div>
                         <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
@@ -2704,8 +2878,8 @@
             </div>
 
                 <div class="page-nav-row">
-                    <button class="back-to-home-btn" onclick="navigateTo('about')">← About</button>
-                    <button class="back-to-home-btn" onclick="navigateTo('contact')">Contact →</button>
+                    <button class="back-to-home-btn" onclick="navigateTo('home')">← Home</button>
+                    <button class="back-to-home-btn" onclick="navigateTo('about')">About →</button>
                 </div>
         </section>
 
@@ -2780,18 +2954,25 @@
                     <!-- Contact Form -->
                     <div class="contact-form-card">
                         <h3>Send a Message</h3>
-                        <form onsubmit="event.preventDefault(); alert('Message sent successfully!'); this.reset();">
+                        <form action="https://formsubmit.co/vishnuselvan2506@gmail.com" method="POST">
+                            <!-- FormSubmit Configuration -->
+                            <input type="hidden" name="_subject" value="New StellarX Contact Message">
+                            <input type="hidden" name="_captcha" value="true">
+                            <input type="hidden" name="_template" value="table">
+                            <input type="hidden" name="_next" value="https://kvigneshsivan-bot.github.io">
+                            <input type="text" name="_honey" style="display:none">
+
                             <div class="form-group">
                                 <label for="contact-name">Name</label>
-                                <input type="text" id="contact-name" placeholder="Your full name" required>
+                                <input type="text" id="contact-name" name="name" placeholder="Your full name" required>
                             </div>
                             <div class="form-group">
                                 <label for="contact-email">Email</label>
-                                <input type="email" id="contact-email" placeholder="Your email address" required>
+                                <input type="email" id="contact-email" name="email" placeholder="Your email address" required>
                             </div>
                             <div class="form-group">
                                 <label for="contact-message">Message</label>
-                                <textarea id="contact-message" placeholder="Your message or query..." required></textarea>
+                                <textarea id="contact-message" name="message" placeholder="Your message or query..." required></textarea>
                             </div>
                             <button type="submit" class="submit-btn">Send Message</button>
                         </form>
@@ -2799,7 +2980,7 @@
                 </div>
 
                 <div class="page-nav-row">
-                    <button class="back-to-home-btn" onclick="navigateTo('events')">← Events</button>
+                    <button class="back-to-home-btn" onclick="navigateTo('about')">← About</button>
                     <button class="back-to-home-btn" onclick="navigateTo('home')">Home →</button>
                 </div>
             </div>
@@ -3027,7 +3208,7 @@
 
         // ── Countdown Timer ──
         (function() {
-            const eventDate = new Date(2026, 1, 28, 10, 0, 0);
+            const eventDate = new Date(2026, 2, 4, 9, 0, 0);
             const countdownEl = document.getElementById('eventCountdown');
             if (!countdownEl) return;
 
