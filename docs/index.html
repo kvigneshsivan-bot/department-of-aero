@@ -924,66 +924,11 @@
             z-index: -1;
         }
 
-        /* Intro Video Container */
-        .intro-video-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            opacity: 1;
-            transition: opacity 0.8s ease-in-out;
-        }
-
-        .intro-video-container.fade-out {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .intro-video-container video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .skip-intro-btn {
-            position: absolute;
-            bottom: 30px;
-            right: 30px;
-            padding: 12px 24px;
-            background: rgba(240, 165, 0, 0.8);
-            color: #000;
-            border: none;
-            border-radius: 25px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 14px;
-            font-family: 'Exo 2', sans-serif;
-            transition: all 0.3s ease;
-            z-index: 10000;
-        }
-
-        .skip-intro-btn:hover {
-            background: rgba(240, 165, 0, 1);
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(240, 165, 0, 0.8);
-        }
-
         /* Main content */
         .main-content {
-            opacity: 0;
-            transition: opacity 0.8s ease-in-out 0.5s;
+            opacity: 1;
             position: relative;
             z-index: 1;
-        }
-
-        .main-content.show {
-            opacity: 1;
         }
 
         /* Hero Section */
@@ -1248,86 +1193,6 @@
             100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
         }
 
-        /* Event countdown timer */
-        .event-countdown {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 25px;
-            background: linear-gradient(135deg, rgba(240, 165, 0, 0.08) 0%, rgba(255, 107, 0, 0.05) 100%);
-            border: 1px solid rgba(240, 165, 0, 0.2);
-            border-radius: 20px;
-            position: relative;
-            z-index: 1;
-        }
-        .countdown-label {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
-            color: #f0a500;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 15px;
-        }
-        .countdown-timer {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-        .countdown-unit {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-width: 80px;
-            background: rgba(10, 14, 39, 0.6);
-            border: 1px solid rgba(240, 165, 0, 0.15);
-            border-radius: 12px;
-            padding: 12px 8px;
-        }
-        .countdown-value {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.8rem;
-            font-weight: 900;
-            color: #fff;
-            background: linear-gradient(135deg, #f0a500, #ff6b00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1;
-            display: inline-block;
-            transition: transform 0.3s ease;
-        }
-        .countdown-value.tick {
-            animation: flipTick 0.6s ease-in-out;
-        }
-        @keyframes flipTick {
-            0% { transform: perspective(300px) rotateX(0deg) scale(1); }
-            30% { transform: perspective(300px) rotateX(-30deg) scale(0.95); }
-            60% { transform: perspective(300px) rotateX(15deg) scale(1.05); }
-            100% { transform: perspective(300px) rotateX(0deg) scale(1); }
-        }
-        .countdown-unit-label {
-            font-size: 0.7rem;
-            color: #b0a080;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-top: 8px;
-        }
-        .countdown-separator {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
-            color: rgba(240, 165, 0, 0.4);
-            align-self: center;
-            animation: blink 1s step-end infinite;
-        }
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
-        .countdown-over {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            color: #f0a500;
-            animation: pulseGlow 2s ease-in-out infinite;
-        }
-
         .section-title {
             font-family: 'Orbitron', sans-serif;
             font-size: 3rem;
@@ -1531,6 +1396,8 @@
         /* Event Poster */
         .event-poster {
             width: 100%;
+            aspect-ratio: 3 / 4;
+            object-fit: cover;
             border-radius: 10px;
             border: 2px solid rgba(240, 165, 0, 0.4);
             margin-bottom: 15px;
@@ -2198,13 +2065,6 @@
                 grid-template-columns: 1fr;
             }
 
-            .skip-intro-btn {
-                bottom: 15px;
-                right: 15px;
-                padding: 10px 16px;
-                font-size: 12px;
-            }
-
             .category-title {
                 font-size: 1.4rem;
             }
@@ -2342,14 +2202,6 @@
     </style>
 </head>
 <body>
-    <!-- Intro Video -->
-    <div class="intro-video-container" id="introVideo">
-        <video id="introVid" autoplay muted playsinline>
-            <source src="https://image2url.com/r2/default/videos/1771517402620-08cd8084-7442-49ad-bd83-8c128bc8e84c.mp4" type="video/mp4">
-        </video>
-        <button class="skip-intro-btn" id="skipBtn">Skip Intro</button>
-    </div>
-
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
@@ -2479,12 +2331,6 @@
 
             <h2 class="section-title">Events</h2>
 
-            <!-- Countdown Timer -->
-            <div class="event-countdown scroll-reveal">
-                <div class="countdown-label">Event Starts In</div>
-                <div class="countdown-timer" id="eventCountdown"></div>
-            </div>
-
             <!-- Technical Events -->
             <div class="event-category scroll-reveal">
                 <h3 class="category-title">🚀 Technical Events <span class="category-count">3</span></h3>
@@ -2493,7 +2339,7 @@
                     <!-- Aircraft Contest -->
                     <div class="event-card">
                         <div class="event-poster-wrap">
-                            <img src="https://image2url.com/r2/default/images/1771748390571-d9a76afe-9982-41b0-9884-4bafee90f0cc.jpeg" alt="Aircraft Contest Poster" class="event-poster" onclick="openPosterLightbox(this.src)">
+                            <img src="https://image2url.com/r2/default/images/1772035909514-82a6906d-ec91-4dce-951d-10b96553ca4b.jpeg" alt="Aircraft Contest Poster" class="event-poster" onclick="openPosterLightbox(this.src)">
                         </div>
                         <div class="event-icon">🛩️</div>
                         <h3>Aircraft Contest</h3>
@@ -2508,6 +2354,8 @@
                                 <li>The model made is evaluated with some criterias explained at the time of the event</li>
                                 <li>The team that has the most feasible design wins</li>
                             </ul>
+                            <a href="https://online.flippingbook.com/view/559449465/" class="fbo-embed" data-fbo-id="a7d0200ca2" data-fbo-ratio="3:2" data-fbo-lightbox="yes" data-fbo-width="100%" data-fbo-height="auto" data-fbo-version="1" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 15px; padding: 10px 20px; background: linear-gradient(135deg, rgba(240, 165, 0, 0.2), rgba(255, 107, 0, 0.1)); border: 1px solid rgba(240, 165, 0, 0.4); border-radius: 12px; color: #f0a500; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: all 0.3s ease; max-width: 100%;" onmouseover="this.style.background='linear-gradient(135deg, rgba(240,165,0,0.35), rgba(255,107,0,0.2))'; this.style.boxShadow='0 0 15px rgba(240,165,0,0.3)';" onmouseout="this.style.background='linear-gradient(135deg, rgba(240,165,0,0.2), rgba(255,107,0,0.1))'; this.style.boxShadow='none';">📄 Rule Book</a>
+                            <script async defer src="https://online.flippingbook.com/EmbedScriptUrl.aspx?m=redir&hid=559449465"></script>
                         </div>
                         <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
                     </div>
@@ -2515,7 +2363,7 @@
                     <!-- Helios Lift -->
                     <div class="event-card">
                         <div class="event-poster-wrap">
-                            <img src="https://image2url.com/r2/default/images/1771549393597-41341483-a4b3-493a-8596-66ed91054261.jpeg" alt="Helios Lift Poster" class="event-poster" onclick="openPosterLightbox(this.src)">
+                            <img src="https://image2url.com/r2/default/images/1772036384860-056378b4-95a3-430f-aa5a-11ae38bf6237.jpeg" alt="Helios Lift Poster" class="event-poster" onclick="openPosterLightbox(this.src)">
                         </div>
                         <div class="event-icon">🎈</div>
                         <h3>Helios Lift</h3>
@@ -2537,7 +2385,7 @@
                     <!-- Crane Bridge Contest -->
                     <div class="event-card">
                         <div class="event-poster-wrap">
-                            <img src="https://image2url.com/r2/default/images/1771748518167-2819b0d2-ab4c-4802-a5ff-7a9ccae346ea.jpeg" alt="Crane Bridge Contest Poster" class="event-poster" onclick="openPosterLightbox(this.src)">
+                            <img src="https://image2url.com/r2/default/images/1772021292009-78ea076b-9252-4696-ad17-5b7ae68ba53e.jpeg" alt="Crane Bridge Contest Poster" class="event-poster" onclick="openPosterLightbox(this.src)">
                         </div>
                         <div class="event-icon">🌉</div>
                         <h3>Crane Bridge Contest</h3>
@@ -2552,8 +2400,6 @@
                                 <li>The model made is evaluated with some criterias explained at the time of the event</li>
                                 <li>The team that has the most feasible design wins</li>
                             </ul>
-                            <a href="https://online.flippingbook.com/view/559449465/" class="fbo-embed" data-fbo-id="a7d0200ca2" data-fbo-ratio="3:2" data-fbo-lightbox="yes" data-fbo-width="100%" data-fbo-height="auto" data-fbo-version="1" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 15px; padding: 10px 20px; background: linear-gradient(135deg, rgba(240, 165, 0, 0.2), rgba(255, 107, 0, 0.1)); border: 1px solid rgba(240, 165, 0, 0.4); border-radius: 12px; color: #f0a500; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: all 0.3s ease; max-width: 100%;" onmouseover="this.style.background='linear-gradient(135deg, rgba(240,165,0,0.35), rgba(255,107,0,0.2))'; this.style.boxShadow='0 0 15px rgba(240,165,0,0.3)';" onmouseout="this.style.background='linear-gradient(135deg, rgba(240,165,0,0.2), rgba(255,107,0,0.1))'; this.style.boxShadow='none';">📄 Rule Book</a>
-                            <script async defer src="https://online.flippingbook.com/EmbedScriptUrl.aspx?m=redir&hid=559449465"></script>
                         </div>
                         <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
                     </div>
@@ -2567,6 +2413,9 @@
                 <div class="events-grid">
                     <!-- Binary Decode -->
                     <div class="event-card">
+                        <div class="event-poster-wrap">
+                            <img src="https://image2url.com/r2/default/images/1772037986179-11e98fe9-ac04-49c9-bf18-fb0101733685.jpeg" alt="Binary Decode Poster" class="event-poster" onclick="openPosterLightbox(this.src)">
+                        </div>
                         <div class="event-icon">💻</div>
                         <h3>Binary Decode</h3>
                         <span class="entry-fee-badge">₹30</span>
@@ -2604,6 +2453,9 @@
 
                     <!-- Do or Die -->
                     <div class="event-card">
+                        <div class="event-poster-wrap">
+                            <img src="https://image2url.com/r2/default/images/1772038041586-bac1ea15-3ac5-434b-8c87-a934a24697da.jpeg" alt="Do or Die Poster" class="event-poster" onclick="openPosterLightbox(this.src)">
+                        </div>
                         <div class="event-icon">🎲</div>
                         <h3>Do or Die</h3>
                         <span class="entry-fee-badge">₹30</span>
@@ -2852,32 +2704,6 @@
     </div>
 
     <script>
-        // Intro video handling
-        const introVideo = document.getElementById('introVideo');
-        const mainContent = document.getElementById('mainContent');
-        const videoElement = document.getElementById('introVid');
-        const skipBtn = document.getElementById('skipBtn');
-
-        let introComplete = false;
-
-        // Auto-fade after 5 seconds or when video ends
-        function completeIntro() {
-            if (introComplete) return;
-            introComplete = true;
-            
-            introVideo.classList.add('fade-out');
-            mainContent.classList.add('show');
-        }
-
-        // Skip button functionality
-        skipBtn.addEventListener('click', completeIntro);
-
-        // Video ended event
-        videoElement.addEventListener('ended', completeIntro);
-
-        // 5-second timeout
-        setTimeout(completeIntro, 5000);
-
         // Navigation functionality
         function navigateTo(page) {
             // Hide all page content sections
@@ -3054,55 +2880,6 @@
                 p.style.opacity = Math.random() * 0.5 + 0.1;
                 container.appendChild(p);
             }
-        })();
-
-        // ── Countdown Timer ──
-        (function() {
-            const eventDate = new Date(2026, 2, 4, 9, 0, 0);
-            const countdownEl = document.getElementById('eventCountdown');
-            if (!countdownEl) return;
-
-            // Build static HTML once
-            countdownEl.innerHTML =
-                '<div class="countdown-unit"><span class="countdown-value" id="cd-days">00</span><span class="countdown-unit-label">Days</span></div>' +
-                '<span class="countdown-separator">:</span>' +
-                '<div class="countdown-unit"><span class="countdown-value" id="cd-hours">00</span><span class="countdown-unit-label">Hours</span></div>' +
-                '<span class="countdown-separator">:</span>' +
-                '<div class="countdown-unit"><span class="countdown-value" id="cd-mins">00</span><span class="countdown-unit-label">Minutes</span></div>' +
-                '<span class="countdown-separator">:</span>' +
-                '<div class="countdown-unit"><span class="countdown-value" id="cd-secs">00</span><span class="countdown-unit-label">Seconds</span></div>';
-
-            var cdDays = document.getElementById('cd-days');
-            var cdHours = document.getElementById('cd-hours');
-            var cdMins = document.getElementById('cd-mins');
-            var cdSecs = document.getElementById('cd-secs');
-            var prevVals = { d: '', h: '', m: '', s: '' };
-
-            function triggerTick(el) {
-                el.classList.remove('tick');
-                void el.offsetWidth; // reflow
-                el.classList.add('tick');
-            }
-
-            function updateCountdown() {
-                var now = new Date();
-                var diff = eventDate - now;
-                if (diff <= 0) {
-                    countdownEl.innerHTML = '<span class="countdown-over">\uD83D\uDE80 Event is LIVE!</span>';
-                    return;
-                }
-                var d = String(Math.floor(diff / 86400000)).padStart(2,'0');
-                var h = String(Math.floor((diff / 3600000) % 24)).padStart(2,'0');
-                var m = String(Math.floor((diff / 60000) % 60)).padStart(2,'0');
-                var s = String(Math.floor((diff / 1000) % 60)).padStart(2,'0');
-
-                if (d !== prevVals.d) { cdDays.textContent = d; triggerTick(cdDays); prevVals.d = d; }
-                if (h !== prevVals.h) { cdHours.textContent = h; triggerTick(cdHours); prevVals.h = h; }
-                if (m !== prevVals.m) { cdMins.textContent = m; triggerTick(cdMins); prevVals.m = m; }
-                if (s !== prevVals.s) { cdSecs.textContent = s; triggerTick(cdSecs); prevVals.s = s; }
-            }
-            updateCountdown();
-            setInterval(updateCountdown, 1000);
         })();
 
         // ── Navbar scroll effect ──
