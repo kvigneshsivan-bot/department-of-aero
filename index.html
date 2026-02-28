@@ -1481,6 +1481,54 @@
             box-shadow: 0 0 10px rgba(240, 165, 0, 0.3);
         }
 
+        .card-register-btn {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 10px 24px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(135deg, #f0a500 0%, #ff6b00 100%);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 12px rgba(240, 165, 0, 0.3);
+        }
+
+        .card-register-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 0 20px rgba(240, 165, 0, 0.5), 0 0 40px rgba(240, 165, 0, 0.2);
+        }
+
+        /* Highlighted register button with pulse animation */
+        .card-register-btn.highlight {
+            background: linear-gradient(135deg, #00e676 0%, #00c853 50%, #00e676 100%);
+            background-size: 200% 200%;
+            animation: highlightPulse 2s ease-in-out infinite, gradientShift 3s ease infinite;
+            box-shadow: 0 0 15px rgba(0, 230, 118, 0.5), 0 0 30px rgba(0, 200, 83, 0.3);
+            font-size: 0.9rem;
+            padding: 12px 28px;
+            position: relative;
+        }
+        .card-register-btn.highlight:hover {
+            transform: translateY(-3px) scale(1.08);
+            box-shadow: 0 0 25px rgba(0, 230, 118, 0.7), 0 0 50px rgba(0, 200, 83, 0.4);
+        }
+        @keyframes highlightPulse {
+            0%, 100% { box-shadow: 0 0 15px rgba(0, 230, 118, 0.5), 0 0 30px rgba(0, 200, 83, 0.3); }
+            50% { box-shadow: 0 0 25px rgba(0, 230, 118, 0.8), 0 0 50px rgba(0, 200, 83, 0.5), 0 0 70px rgba(0, 230, 118, 0.2); }
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         /* Category Headers */
         .event-category {
             margin-top: 40px;
@@ -1707,20 +1755,24 @@
 
         .contact-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
             gap: 40px;
             margin-bottom: 40px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .contact-info-card {
             background: linear-gradient(135deg, rgba(30, 30, 60, 0.7) 0%, rgba(20, 20, 50, 0.7) 100%);
             border: 2px solid rgba(240, 165, 0, 0.2);
             border-radius: 18px;
-            padding: 35px;
+            padding: 45px 50px;
             box-shadow: 0 0 20px rgba(240, 165, 0, 0.08);
             transition: all 0.4s ease;
             position: relative;
             z-index: 1;
+            width: 100%;
         }
 
         .contact-info-card:hover {
@@ -2508,6 +2560,7 @@
                             <script async defer src="https://online.flippingbook.com/EmbedScriptUrl.aspx?m=redir&hid=559449465"></script>
                         </div>
                         <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdOoD_XHnt2Zu0SQ6zHMZ2xD8Q5CHNwFVfYvesYX5HTm6qkqQ/viewform?usp=publish-editor" target="_blank" class="card-register-btn highlight">🎯 Register Now</a>
                     </div>
 
                     <!-- Helios Lift -->
@@ -2530,6 +2583,7 @@
                             </ul>
                         </div>
                         <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdOoD_XHnt2Zu0SQ6zHMZ2xD8Q5CHNwFVfYvesYX5HTm6qkqQ/viewform?usp=publish-editor" target="_blank" class="card-register-btn highlight">🎯 Register Now</a>
                     </div>
 
                     <!-- Crane Bridge Contest -->
@@ -2552,6 +2606,7 @@
                             </ul>
                         </div>
                         <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdOoD_XHnt2Zu0SQ6zHMZ2xD8Q5CHNwFVfYvesYX5HTm6qkqQ/viewform?usp=publish-editor" target="_blank" class="card-register-btn highlight">🎯 Register Now</a>
                     </div>
                 </div>
             </div>
@@ -2582,12 +2637,13 @@
                             </ul>
                         </div>
                         <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdOoD_XHnt2Zu0SQ6zHMZ2xD8Q5CHNwFVfYvesYX5HTm6qkqQ/viewform?usp=publish-editor" target="_blank" class="card-register-btn highlight">🎯 Register Now</a>
                     </div>
 
                     <!-- Story Detective -->
                     <div class="event-card">
                         <div class="event-poster-wrap">
-                            <img src="https://image2url.com/r2/default/images/1772120631314-3f5b3423-4c13-41d4-9f2e-d3d4efdc8f56.jpeg" alt="Story Detective Poster" class="event-poster" onclick="openPosterLightbox(this.src)">
+                            <img src="https://image2url.com/r2/default/images/1772192578299-7c933782-3b83-49af-a433-2ea805bb8571.jpeg" alt="Story Detective Poster" class="event-poster" onclick="openPosterLightbox(this.src)">
                         </div>
                         <div class="event-icon">📖</div>
                         <h3>Story Detective</h3>
@@ -2602,12 +2658,13 @@
                             </ul>
                         </div>
                         <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdOoD_XHnt2Zu0SQ6zHMZ2xD8Q5CHNwFVfYvesYX5HTm6qkqQ/viewform?usp=publish-editor" target="_blank" class="card-register-btn highlight">🎯 Register Now</a>
                     </div>
 
                     <!-- Do or Die -->
                     <div class="event-card">
                         <div class="event-poster-wrap">
-                            <img src="https://image2url.com/r2/default/images/1772038041586-bac1ea15-3ac5-434b-8c87-a934a24697da.jpeg" alt="Do or Die Poster" class="event-poster" onclick="openPosterLightbox(this.src)">
+                            <img src="https://image2url.com/r2/default/images/1772192651985-089219ca-d3ee-4f48-adbe-f2dd6de15d7c.jpeg" alt="Do or Die Poster" class="event-poster" onclick="openPosterLightbox(this.src)">
                         </div>
                         <div class="event-icon">🎲</div>
                         <h3>Do or Die</h3>
@@ -2622,6 +2679,7 @@
                             </ul>
                         </div>
                         <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdOoD_XHnt2Zu0SQ6zHMZ2xD8Q5CHNwFVfYvesYX5HTm6qkqQ/viewform?usp=publish-editor" target="_blank" class="card-register-btn highlight">🎯 Register Now</a>
                     </div>
                 </div>
             </div>
@@ -2793,13 +2851,13 @@
                             </div>
                         </div>
 
-                        <div class="contact-detail">
+                        <a href="https://www.instagram.com/stellarx_26" target="_blank" rel="noopener" class="contact-detail" style="text-decoration: none; color: inherit; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.background='linear-gradient(135deg, rgba(225,48,108,0.15), rgba(131,58,180,0.15))'; this.style.borderColor='rgba(225,48,108,0.5)';" onmouseout="this.style.background=''; this.style.borderColor='';">
                             <div class="contact-detail-icon">📸</div>
                             <div class="contact-detail-text">
                                 <strong>Instagram</strong>
                                 @stellarx_26
                             </div>
-                        </div>
+                        </a>
 
                         <!-- WhatsApp Direct Message -->
                         <a href="https://wa.me/919363647063?text=Hi%20Vishnu%2C%20I%20have%20a%20query%20regarding%20StellarX%20event." target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 12px; margin-top: 20px; padding: 14px 24px; background: linear-gradient(135deg, #25D366, #128C7E); border: none; border-radius: 14px; color: #fff; font-weight: 700; font-size: 1rem; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); cursor: pointer;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(37,211,102,0.45)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(37,211,102,0.3)';">
@@ -2808,32 +2866,7 @@
                         </a>
                     </div>
 
-                    <!-- Contact Form -->
-                    <div class="contact-form-card">
-                        <h3>Send a Message</h3>
-                        <form action="https://formsubmit.co/vishnuselvan2506@gmail.com" method="POST">
-                            <!-- FormSubmit Configuration -->
-                            <input type="hidden" name="_subject" value="New StellarX Contact Message">
-                            <input type="hidden" name="_captcha" value="true">
-                            <input type="hidden" name="_template" value="table">
-                            <input type="hidden" name="_next" value="https://kvigneshsivan-bot.github.io">
-                            <input type="text" name="_honey" style="display:none">
 
-                            <div class="form-group">
-                                <label for="contact-name">Name</label>
-                                <input type="text" id="contact-name" name="name" placeholder="Your full name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="contact-email">Email</label>
-                                <input type="email" id="contact-email" name="email" placeholder="Your email address" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="contact-message">Message</label>
-                                <textarea id="contact-message" name="message" placeholder="Your message or query..." required></textarea>
-                            </div>
-                            <button type="submit" class="submit-btn">Send Message</button>
-                        </form>
-                    </div>
                 </div>
 
                 <div class="page-nav-row">
