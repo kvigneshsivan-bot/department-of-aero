@@ -1481,6 +1481,54 @@
             box-shadow: 0 0 10px rgba(240, 165, 0, 0.3);
         }
 
+        .card-register-btn {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 10px 24px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(135deg, #f0a500 0%, #ff6b00 100%);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 12px rgba(240, 165, 0, 0.3);
+        }
+
+        .card-register-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 0 20px rgba(240, 165, 0, 0.5), 0 0 40px rgba(240, 165, 0, 0.2);
+        }
+
+        /* Highlighted register button with pulse animation */
+        .card-register-btn.highlight {
+            background: linear-gradient(135deg, #00e676 0%, #00c853 50%, #00e676 100%);
+            background-size: 200% 200%;
+            animation: highlightPulse 2s ease-in-out infinite, gradientShift 3s ease infinite;
+            box-shadow: 0 0 15px rgba(0, 230, 118, 0.5), 0 0 30px rgba(0, 200, 83, 0.3);
+            font-size: 0.9rem;
+            padding: 12px 28px;
+            position: relative;
+        }
+        .card-register-btn.highlight:hover {
+            transform: translateY(-3px) scale(1.08);
+            box-shadow: 0 0 25px rgba(0, 230, 118, 0.7), 0 0 50px rgba(0, 200, 83, 0.4);
+        }
+        @keyframes highlightPulse {
+            0%, 100% { box-shadow: 0 0 15px rgba(0, 230, 118, 0.5), 0 0 30px rgba(0, 200, 83, 0.3); }
+            50% { box-shadow: 0 0 25px rgba(0, 230, 118, 0.8), 0 0 50px rgba(0, 200, 83, 0.5), 0 0 70px rgba(0, 230, 118, 0.2); }
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         /* Category Headers */
         .event-category {
             margin-top: 40px;
@@ -2512,6 +2560,7 @@
                             <script async defer src="https://online.flippingbook.com/EmbedScriptUrl.aspx?m=redir&hid=559449465"></script>
                         </div>
                         <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdOoD_XHnt2Zu0SQ6zHMZ2xD8Q5CHNwFVfYvesYX5HTm6qkqQ/viewform?usp=publish-editor" target="_blank" class="card-register-btn highlight">🎯 Register Now</a>
                     </div>
 
                     <!-- Helios Lift -->
@@ -2534,6 +2583,7 @@
                             </ul>
                         </div>
                         <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdOoD_XHnt2Zu0SQ6zHMZ2xD8Q5CHNwFVfYvesYX5HTm6qkqQ/viewform?usp=publish-editor" target="_blank" class="card-register-btn highlight">🎯 Register Now</a>
                     </div>
 
                     <!-- Crane Bridge Contest -->
@@ -2556,6 +2606,7 @@
                             </ul>
                         </div>
                         <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdOoD_XHnt2Zu0SQ6zHMZ2xD8Q5CHNwFVfYvesYX5HTm6qkqQ/viewform?usp=publish-editor" target="_blank" class="card-register-btn highlight">🎯 Register Now</a>
                     </div>
                 </div>
             </div>
@@ -2586,6 +2637,7 @@
                             </ul>
                         </div>
                         <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdOoD_XHnt2Zu0SQ6zHMZ2xD8Q5CHNwFVfYvesYX5HTm6qkqQ/viewform?usp=publish-editor" target="_blank" class="card-register-btn highlight">🎯 Register Now</a>
                     </div>
 
                     <!-- Story Detective -->
@@ -2606,6 +2658,7 @@
                             </ul>
                         </div>
                         <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdOoD_XHnt2Zu0SQ6zHMZ2xD8Q5CHNwFVfYvesYX5HTm6qkqQ/viewform?usp=publish-editor" target="_blank" class="card-register-btn highlight">🎯 Register Now</a>
                     </div>
 
                     <!-- Do or Die -->
@@ -2626,6 +2679,7 @@
                             </ul>
                         </div>
                         <button class="expand-btn" onclick="toggleRules(this)">View Rules</button>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdOoD_XHnt2Zu0SQ6zHMZ2xD8Q5CHNwFVfYvesYX5HTm6qkqQ/viewform?usp=publish-editor" target="_blank" class="card-register-btn highlight">🎯 Register Now</a>
                     </div>
                 </div>
             </div>
